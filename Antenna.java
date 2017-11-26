@@ -84,7 +84,7 @@ public class Antenna extends Equipment {
 
 	public void addConn(Antenna a){
 		for(Antenna l: connections)
-			if(a.getIDNum()==l.getIDNum())
+			if(a.getIdNum()==l.getIdNum())
 				return;
 		connections.add(a);
 		a.addConn(this);
@@ -93,7 +93,7 @@ public class Antenna extends Equipment {
     public void rmvConn(Antenna a){
     	int i = 0;
     	for(Antenna l: connections) {
-    		if(a.getIDNum()==l.getIDNum()) {
+    		if(a.getIdNum()==l.getIdNum()) {
     			connections.remove(i);
     			a.rmvConn(this);
     		}

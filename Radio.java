@@ -111,7 +111,7 @@ public class Radio extends Equipment {
     	if(AP==true) {
     		int i = 0;
     		for(Radio s: connections) {
-    			if(r.getIDNum()==s.getIDNum()) {
+    			if(r.getIdNum()==s.getIdNum()) {
     				connections.remove(i);
     				r.rmvConn(this);
     			}
@@ -122,7 +122,7 @@ public class Radio extends Equipment {
     	else if(Sub==true) {
     		int i = 0;
     		for(Radio s: connections) {
-    			if(r.getIDNum()==s.getIDNum()) 
+    			if(r.getIdNum()==s.getIdNum()) 
     				connections.remove(i);
     		}
     		i++;

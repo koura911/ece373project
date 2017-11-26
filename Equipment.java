@@ -1,8 +1,8 @@
-package company.isp.equipment;
+package system.hardware;
 
 import java.util.ArrayList;
 
-import company.isp.location.Location;
+import system.information.*;
 
 public class Equipment {
 	
@@ -11,15 +11,16 @@ public class Equipment {
     private String brand;
     private String serialNumber;
     private int idNum;
-    private int dateInstalled; //format mm dd yy
+    private Date dateInstalled; //format mm dd yy
     private Location location;
+    
     public Equipment() {
     	name = "unknown";
     	model = "unknown";
     	brand = "unknown";
     	serialNumber = "unknown";
     	idNum = 0;
-    	dateInstalled = 0;
+    	dateInstalled = new Date();
     	location = new Location();
     	
     	
@@ -54,10 +55,10 @@ public class Equipment {
 	public void setIdNum(int idNum) {
 		this.idNum = idNum;
 	}
-	public int getDateInstalled() {
+	public Date getDateInstalled() {
 		return dateInstalled;
 	}
-	public void setDateInstalled(int i) {
+	public void setDateInstalled(Date i) {
 		this.dateInstalled = i;
 	}
 	public Location getLocation() {

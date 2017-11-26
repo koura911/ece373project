@@ -21,7 +21,6 @@ public class Person {
 	}
 
 	public boolean checkPswd(String enteredPW) {
-		// TODO should be implemented
 		boolean correct = true;
 		
 		return correct;

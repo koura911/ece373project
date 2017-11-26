@@ -49,7 +49,7 @@ public class NetworkDevice extends Equipment{
 
 	public void addDev(Equipment d ){
 		for(Equipment e: connDevs)
-			if(d.getIDNum()==e.getIDNum()) {
+			if(d.getIdNum()==e.getIdNum()) {
 				System.out.println(d.getBrand()+" "+d.getModel()+" is already listed as a connected device.");
 				return;
 			}
@@ -58,7 +58,7 @@ public class NetworkDevice extends Equipment{
 	public void rmvDev( Equipment d){
 		int i = 0;
 		for(Equipment e: connDevs) {
-			if(d.getIDNum()==e.getIDNum()) {
+			if(d.getIdNum()==e.getIdNum()) {
 				connDevs.remove(i);
 				System.out.println(d.getBrand()+" "+d.getModel()+" has been removed from connected devices.");
 			}

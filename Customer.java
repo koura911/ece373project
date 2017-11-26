@@ -1,6 +1,9 @@
-package people;
+package system.people;
 
 import java.util.ArrayList;
+import system.information.Location;
+import system.hardware.Equipment;
+import system.hardware.Radio;
 
 public class Customer {
 
@@ -68,15 +71,19 @@ public class Customer {
 		//not sure what does in here. 
 		//is it suppose to look throught the customer equipment array
 		//or a different array in a different class?
+		Radio r1 = new Radio();
+		
+		return r1;
 	}
 	
 	public int checkSpeedUP() {
 		//INCOMPLETE
+		
+		return 0;
 	}
 	public int checkSpeedDown() {
 		//INCOMPLETE
+		
+		return 0;
 	}
-	
-	
-	
 }
