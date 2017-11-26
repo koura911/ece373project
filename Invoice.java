@@ -15,6 +15,13 @@ public class Invoice extends Form {
 	private double totalDue;
 	private Date dueDate;
 
+	public Invoice() {
+		super();
+		minDue = 0;
+		totalDue = 0;
+		dueDate = new Date();
+	}
+	
 	public double getMinDue() {
 		return this.minDue;
 	}

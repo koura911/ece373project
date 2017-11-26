@@ -16,6 +16,11 @@ import system.people.Person;
 public class Roster extends Report {
 	private int totalPeople;
 
+	public Roster() {
+		super();
+		totalPeople = 0;
+	}
+	
 	public int getTotalPeople() {
 		this.setTotalPeople(this.getPeople().size());
 		return this.getPeople().size();

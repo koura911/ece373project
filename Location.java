@@ -7,6 +7,7 @@ public class Location {
     private double  gpsLat;//should be entered as degrees decimal
     private double gpsLon;
     private String Address;
+    
     public Location() {
     	gpsLat = 0.0;
     	gpsLon = 0.0;

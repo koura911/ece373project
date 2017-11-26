@@ -6,10 +6,16 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 public abstract class Report {
-	private ArrayList<Person> people = new ArrayList<Person>();
-	private ArrayList<Equipment> equipment = new ArrayList<Equipment>();
+	private ArrayList<Person> people;
+	private ArrayList<Equipment> equipment;
 	private int number;
 
+	public Report() {
+		people = new ArrayList<Person>();
+		equipment = new ArrayList<Equipment>();
+		number = 0;
+	}
+	
 	public ArrayList<Person> getPeople() {
 		return this.people;
 	}

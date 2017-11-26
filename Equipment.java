@@ -1,7 +1,5 @@
 package system.hardware;
 
-import java.util.ArrayList;
-
 import system.information.*;
 
 public class Equipment {

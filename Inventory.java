@@ -16,6 +16,11 @@ import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 public class Inventory extends Report {
 	private int totItems;
 
+	public Inventory() {
+		super();
+		totItems = 0;
+	}
+	
 	public int getTotItems() {
 		this.setTotItems(this.getEquipment().size());
 		return this.totItems;
