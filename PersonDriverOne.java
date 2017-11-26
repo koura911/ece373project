@@ -1,6 +1,6 @@
-package people;
+package test;
 
-import people.*;
+import system.people.*;
 
 public class PersonDriverOne {
 
@@ -14,7 +14,7 @@ public class PersonDriverOne {
 		//Checking Person Methods
 		System.out.println("Person Class");
 		System.out.println("Name should be Sam it is "+p1.getName());
-		System.out.println("userID should be 1234 it is "+p1.getUserID();
+		System.out.println("userID should be 1234 it is "+p1.getUserID());
 		System.out.println("Password should be Password it is "+p1.getPswd());
 		if(p1.checkPswd("Password") == true) {
 			System.out.println("method works");

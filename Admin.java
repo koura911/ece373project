@@ -1,12 +1,13 @@
-package people;
+package system.people;
 
 import java.util.ArrayList;
 
-import sun.misc.FormattedFloatingDecimal.Form;
+import system.forms.*;
+import system.hardware.*;
 
 public class Admin extends Employee {
 	
-	private ArrayList<People> users;
+	private ArrayList<Person> users;
 	private ArrayList<Report> reports;
 	private ArrayList<Form> forms;
 	private ArrayList<Equipment> equip;
@@ -14,7 +15,7 @@ public class Admin extends Employee {
 	private ArrayList<Employee> empl;
 	
 	public Admin() {
-		users = new ArrayList<People>();
+		users = new ArrayList<Person>();
 		reports = new ArrayList<Report>();
 		forms = new ArrayList<Form>();
 		equip = new ArrayList<Equipment>();
@@ -26,7 +27,7 @@ public class Admin extends Employee {
 	public ArrayList<Equipment> getEquip(){
 		return equip;
 	}
-	public ArrayList<People> getUsers(){
+	public ArrayList<Person> getUsers(){
 		return users;
 	}
 	public ArrayList<Report> getRep(){
@@ -44,7 +45,7 @@ public class Admin extends Employee {
 	
 	
 	//setting methods
-	public void setUsers(ArrayList<People> u) {
+	public void setUsers(ArrayList<Person> u) {
 		users = u;
 	}
 	public void setRep(ArrayList<Report> r) {
@@ -73,10 +74,10 @@ public class Admin extends Employee {
 	public void addCust(Customer c) {
 		cust.add(c);
 	}
-	public addEquip(Equipment o) {
+	public void addEquip(Equipment o) {
 		equip.add(o);
 	}
-	public addEmpl(Employee e) {
+	public void addEmpl(Employee e) {
 		empl.add(e);
 	}
 	

@@ -1,6 +1,7 @@
-package people;
+package system.people;
 
 import java.util.ArrayList;
+import system.hardware.*;
 
 public class Tech extends Employee {
 	

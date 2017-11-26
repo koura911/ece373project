@@ -52,14 +52,14 @@ public class Inventory extends Report {
 		ArrayList<Equipment> temp = new ArrayList<Equipment>();
 		
 		for (int i = 0; i < this.getEquipment().size(); i++) {
-			iDNums.add(this.getEquipment().get(i).getIDNum());
+			iDNums.add(this.getEquipment().get(i).getIdNum());
 		}
 		
 		Collections.sort(iDNums);
 		
 		for (int i = 0; i < iDNums.size(); i++) {
 			for (int j = 0; j < this.getEquipment().size(); j++) {
-				if (iDNums.get(i) == this.getEquipment().get(j).getIDNum()) {
+				if (iDNums.get(i) == this.getEquipment().get(j).getIdNum()) {
 					temp.add(this.getEquipment().get(j));
 					this.getEquipment().remove(j);
 				}
@@ -104,13 +104,13 @@ public class Inventory extends Report {
 				contentStream.newLine();
 				contentStream.showText("     Model: " + this.getEquipment().get(i).getModel());
 				contentStream.newLine();
-				contentStream.showText("     IDNum: " + this.getEquipment().get(i).getIDNum());
+				contentStream.showText("     IDNum: " + this.getEquipment().get(i).getIdNum());
 				contentStream.newLine();
 				contentStream.showText("     SerialNumber: " + this.getEquipment().get(i).getSerialNumber());
 				contentStream.newLine();
 				contentStream.showText("     DateInstalled: " + this.getEquipment().get(i).getDateInstalled().getDate());
 				contentStream.newLine();
-				contentStream.showText("     Location: " + this.getEquipment().get(i).getLocation().getAddress() + " " + this.getEquipment().get(i).getLocation().getGPS());
+				contentStream.showText("     Location: " + this.getEquipment().get(i).getLocation().getAddress() + " " + this.getEquipment().get(i).getLocation().getGpsLat() + " " + this.getEquipment().get(i).getLocation().getGpsLon());
 				contentStream.newLine();
 			}
 			contentStream.endText();

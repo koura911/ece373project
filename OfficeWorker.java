@@ -1,12 +1,12 @@
-package people;
+package system.people;
 
 import java.util.ArrayList;
 
-import sun.misc.FormattedFloatingDecimal.Form;
+import system.forms.*;
 
 public class OfficeWorker {
 
-		ArrayListrrayList<Report> reports;
+		ArrayList<Report> reports;
 		private ArrayList<Form> forms;
 		
 		
@@ -36,14 +36,14 @@ public class OfficeWorker {
 		}
 	
 		public void rmvRep(Report p) {
-			reprots.remove(p);
+			reports.remove(p);
 		}
 		public void rmvForm(Form o) {
 			forms.remove(o);
 		}
 		
 		public Report findReport(int n) {
-			return report.get(n);
+			return reports.get(n);
 		}
 		
 }

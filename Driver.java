@@ -20,7 +20,10 @@ public class Driver {
 	r1.setModel("ePMP1000");
 	r1.setBrand("Cambium");
 	r1.setAP(true);
-	r1.setDateInstalled(111417);
+	//r1.setDateInstalled(111417);
+	Date d1 = new Date(11, 14, 2017);
+	r1.setDateInstalled(d1);
+	
 	r1.setFreqMax(1000);
 	r1.setFreqMin(500);
 	r1.setIdNum(1);
@@ -33,7 +36,8 @@ public class Driver {
 	r2.setModel("ePMP1000");
 	r2.setBrand("Cambium");
 	r2.setAP(false);
-	r2.setDateInstalled(111417);
+	//r2.setDateInstalled(111417);
+	r2.setDateInstalled(d1);
 	r2.setFreqMax(1000);
 	r2.setFreqMin(500);
 	r2.setIdNum(2);
@@ -45,7 +49,8 @@ public class Driver {
 	
 	a1.setBrand("Ubiquiti");
 	a1.setModel("AirMax");
-	a1.setDateInstalled(111417);
+	//a1.setDateInstalled(111417);
+	a1.setDateInstalled(d1);
 	a1.setIdNum(3);
 	a1.setDirectional(false);
 	a1.setMountType("Tower");
@@ -57,7 +62,7 @@ public class Driver {
 	
 	a2.setBrand("Ubiquiti");
 	a2.setModel("PowerBeam");
-	a2.setDateInstalled(111417);
+	a2.setDateInstalled(d1);
 	a2.setIdNum(4);
 	a2.setDirectional(true);
 	a2.setMountType("NonPen");
@@ -69,7 +74,7 @@ public class Driver {
 	
 	n1.setBrand("Mikrotik");
 	n1.setModel("CCR1036");
-	n1.setDateInstalled(111417);
+	n1.setDateInstalled(d1);
 	n1.setIdNum(5);
 	n1.setNetSwitch(false);
 	n1.setRouter(true);
@@ -77,7 +82,7 @@ public class Driver {
 	
 	n2.setBrand("Netgear");
 	n2.setModel("g752tp");
-	n2.setDateInstalled(111417);
+	n2.setDateInstalled(d1);
 	n2.setIdNum(6);
 	n2.setNetSwitch(true);
 	n2.setRouter(false);
@@ -85,9 +90,9 @@ public class Driver {
 	
 	s1.setBrand("supermicro");
 	s1.setModel("2U");
-	s1.setDateInstalled(111417);
+	s1.setDateInstalled(d1);
 	s1.setIdNum(7);
-	s1.setDateLastBackUp(111417);
+	s1.setDateLastBackUp(d1);
 	s1.setOs("Linux");
 	s1.setPurpose("Database");
 	s1.setSerialNumber("PC2114");

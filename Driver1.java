@@ -40,7 +40,7 @@ public class Driver1 {
 		e1d.setYear(2017);
 		e1.setDateInstalled(e1d);
 		
-		e1.setIDNum(5);
+		e1.setIdNum(5);
 		
 		e2.setBrand("Root beer");
 		Date e2d = new Date();
@@ -50,17 +50,17 @@ public class Driver1 {
 		
 		e2.setDateInstalled(e2d);
 		
-		e2.setIDNum(2);
+		e2.setIdNum(2);
 		e2.setModel("Knife");
 		
 		Location l1 = new Location();
 		l1.setAddress("NW");
-		l1.setGPS(56.9);
-		
+		l1.setGpsLat(56.9);
+		l1.setGpsLon(56.9);
 		Location l2 = new Location();
 		l2.setAddress("SW");
-		l2.setGPS(90.5);
-		
+		l2.setGpsLat(90.5);
+		l2.setGpsLon(56.9);
 		e1.setLocation(l1);
 		e2.setLocation(l2);
 		

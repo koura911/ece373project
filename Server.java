@@ -2,18 +2,20 @@ package system.hardware;
 
 import java.util.ArrayList;
 
+import system.information.Date;
+
 public class Server extends Equipment {	
 	
 	 private String os;
      private String purpose;
-     private  int dateLastBackUp;
+     private  Date dateLastBackUp;
      private  ArrayList <Equipment> connDev;
     
      public Server() {
     	
     	os = "unknown";
     	purpose = "unknown";
-    	dateLastBackUp = 0;
+    	dateLastBackUp = new Date();
     	connDev = new ArrayList <Equipment>();
     	
     }
@@ -34,11 +36,11 @@ public class Server extends Equipment {
 		this.purpose = purpose;
 	}
 
-	public int getDateLastBackUp() {
+	public Date getDateLastBackUp() {
 		return dateLastBackUp;
 	}
 
-	public void setDateLastBackUp(int dateLastBackUp) {
+	public void setDateLastBackUp(Date dateLastBackUp) {
 		this.dateLastBackUp = dateLastBackUp;
 	}
 
@@ -52,7 +54,7 @@ public class Server extends Equipment {
    
 	public void addDev(Equipment d ){
 		for(Equipment e: connDev)
-			if(d.getIDNum()==e.getIDNum()) {
+			if(d.getIdNum()==e.getIdNum()) {
 				System.out.println(d.getBrand()+" "+d.getModel()+" is already listed as a connected device.");
 				return;
 			}
@@ -61,7 +63,7 @@ public class Server extends Equipment {
 	public void rmvDev( Equipment d){
 		int i = 0;
 		for(Equipment e: connDev) {
-			if(d.getIDNum()==e.getIDNum()) {
+			if(d.getIdNum()==e.getIdNum()) {
 				connDev.remove(i);
 				System.out.println(d.getBrand()+" "+d.getModel()+" has been removed from connected devices.");
 			}
