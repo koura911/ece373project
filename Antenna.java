@@ -1,6 +1,7 @@
 package system.hardware;
 
 import java.util.ArrayList;
+import javax.swing.*;
 
 public class Antenna extends Equipment {
 	
@@ -83,10 +84,14 @@ public class Antenna extends Equipment {
 
 
 	public void addConn(Antenna a){
-		for(Antenna l: connections)
-			if(a.getIdNum()==l.getIdNum())
+		for(Antenna l: connections) {
+			if(a.getIdNum()==l.getIdNum()) {
+				JOptionPane.showMessageDialog(null, "Cannot add " + a.getName() + ". " + a.getName() + " is already connected.", "Error adding antenna", JOptionPane.ERROR_MESSAGE);
 				return;
+			}
+		}
 		connections.add(a);
+		JOptionPane.showMessageDialog(null, "Added " + a.getName() + ". ", "Add connection", JOptionPane.INFORMATION_MESSAGE);
 		a.addConn(this);
 		return;
 	}
@@ -94,6 +99,7 @@ public class Antenna extends Equipment {
     	int i = 0;
     	for(Antenna l: connections) {
     		if(a.getIdNum()==l.getIdNum()) {
+    			JOptionPane.showMessageDialog(null, a.getName() + " removed.", "Remove connection", JOptionPane.INFORMATION_MESSAGE);
     			connections.remove(i);
     			a.rmvConn(this);
     		}

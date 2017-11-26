@@ -56,7 +56,7 @@ public class Invoice extends Form {
 		
 		try {
 			contentStream = new PDPageContentStream(invoice, contentPage);
-			PDImageXObject businessLogo = PDImageXObject.createFromFile("C:/Users/Oura9_000/Documents/ECE 373/ECE_373_Project/src/images.png", invoice);
+			PDImageXObject businessLogo = PDImageXObject.createFromFile("C:/Users/Oura9_000/Desktop/ECE_373_Project_Git/ece373project/images.png", invoice);
 			contentStream.drawImage(businessLogo,  70, 70);
 			contentStream.beginText();
 			contentStream.setFont(font, 12);

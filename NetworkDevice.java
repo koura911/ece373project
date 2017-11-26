@@ -1,6 +1,7 @@
 package system.hardware;
 
 import java.util.ArrayList;
+import javax.swing.*;
 
 public class NetworkDevice extends Equipment{
 	
@@ -50,7 +51,8 @@ public class NetworkDevice extends Equipment{
 	public void addDev(Equipment d ){
 		for(Equipment e: connDevs)
 			if(d.getIdNum()==e.getIdNum()) {
-				System.out.println(d.getBrand()+" "+d.getModel()+" is already listed as a connected device.");
+				//System.out.println(d.getBrand()+" "+d.getModel()+" is already listed as a connected device.");
+				JOptionPane.showMessageDialog(null, d.getBrand() + " " + d.getModel() + " is already listed as a connected device.", "Error adding network device", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 		connDevs.add(d);
@@ -60,7 +62,8 @@ public class NetworkDevice extends Equipment{
 		for(Equipment e: connDevs) {
 			if(d.getIdNum()==e.getIdNum()) {
 				connDevs.remove(i);
-				System.out.println(d.getBrand()+" "+d.getModel()+" has been removed from connected devices.");
+				//System.out.println(d.getBrand()+" "+d.getModel()+" has been removed from connected devices.");
+				JOptionPane.showMessageDialog(null, d.getBrand() + " " + d.getModel() + "has been removed from connected devices.", "Remove network device", JOptionPane.INFORMATION_MESSAGE);
 			}
 			i++;
 		}

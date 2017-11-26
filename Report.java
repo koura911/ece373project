@@ -52,9 +52,10 @@ public abstract class Report {
 		
 		if (personExists == false) {
 			people.add(newPerson);
+			JOptionPane.showMessageDialog(null, newPerson.getName() + ", userID: " + newPerson.getUserID() + " has been added.", "Add person to report", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else {
-			JOptionPane.showMessageDialog(null, "Person " + newPerson.getName() + ", userID: " + newPerson.getUserID() + ", cannot be added. " + newPerson.getName() + " already exists in the report.", "Error adding person to report", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, newPerson.getName() + ", userID: " + newPerson.getUserID() + ", cannot be added. " + newPerson.getName() + " already exists in the report.", "Error adding person to report", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -70,9 +71,10 @@ public abstract class Report {
 		
 		if (equipmentExists == false) {
 			equipment.add(newEquipment);
+			JOptionPane.showMessageDialog(null, newEquipment.getSerialNumber() + " added to report.", "Add equipment to report", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else {
-			JOptionPane.showMessageDialog(null, "Equipment " + newEquipment.getSerialNumber() + " cannot be added. Equipment " + newEquipment.getSerialNumber() + " already exists in the report.", "Error adding equipment to report", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, newEquipment.getSerialNumber() + " cannot be added. " + newEquipment.getSerialNumber() + " already exists in the report.", "Error adding equipment to report", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -89,9 +91,11 @@ public abstract class Report {
 		
 		if (personExists) {
 			people.remove(oldPersonIndex);
+			JOptionPane.showMessageDialog(null, oldPerson.getName() + " removed from report.", " Remove person from report", JOptionPane.INFORMATION_MESSAGE);
+			
 		}
 		else {
-			JOptionPane.showMessageDialog(null, "Cannot remove person " + oldPerson.getName() + ". Person " + oldPerson.getName() + " does not exist in report.", "Error removing equipment from report", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Cannot remove " + oldPerson.getName() + ". " + oldPerson.getName() + " does not exist in report.", "Error removing equipment from report", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -109,6 +113,7 @@ public abstract class Report {
 		
 		if (equipmentExists) {
 			equipment.remove(oldEquipmentIndex);
+			JOptionPane.showMessageDialog(null, oldEquipment.getSerialNumber() + " removed from report.", "Remove equipment from report", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "Cannot remove equipment " + oldEquipment.getSerialNumber() + ". Equipment " + oldEquipment.getSerialNumber() + " does not exist in report.", "Error removing equipment from report", JOptionPane.ERROR_MESSAGE);
