@@ -7,6 +7,6 @@ import java.util.ArrayList;
 import system.hardware.*;
 
 public class Company {
-	ArrayList<Person> people;
-	ArrayList<Equipment> equipmentList;
+	public ArrayList<Person> people;
+	public ArrayList<Equipment> equipmentList;
 }

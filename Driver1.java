@@ -1,9 +1,11 @@
-package test;
+package system.software;
 
+import system.company.Company;
 import system.forms.*;
 import system.hardware.*;
 import system.information.*;
 import system.people.*;
+import system.software.*;
 
 public class Driver1 {
 	public static void main(String[] args) {
@@ -16,6 +18,7 @@ public class Driver1 {
 		Equipment e2 = new Equipment();
 		Roster ro1 = new Roster();
 		Inventory i1 = new Inventory();
+		Company co = new Company();
 		
 		p1.setName("Kara Danvers");
 		p1.setUserID(01);
@@ -27,7 +30,8 @@ public class Driver1 {
 		p4.setUserID(04);
 		p5.setName("Winn Schott");
 		p5.setUserID(05);
-
+		
+		
 		e1.setSerialNumber("E33642RT456");
 		e1.setName("Bananas");
 		e2.setName("Josh");
@@ -118,5 +122,7 @@ public class Driver1 {
 		
 		ro1.generateRoster();
 		i1.generateInventoryReport();
+		
+		CompanyGUI newGUI = new CompanyGUI("University of Arizona", co);
 	}
 }
