@@ -123,6 +123,6 @@ public class Driver1 {
 		ro1.generateRoster();
 		i1.generateInventoryReport();
 		
-		CompanyGUI newGUI = new CompanyGUI("University of Arizona", co);
+		CompanyGUICustomer newGUI = new CompanyGUICustomer("University of Arizona", co);
 	}
 }

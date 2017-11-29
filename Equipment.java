@@ -1,8 +1,16 @@
 package system.hardware;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+
 import system.information.*;
 
-public class Equipment {
+public class Equipment implements Serializable {
 	
     private String name;
     private String model;
@@ -66,6 +74,45 @@ public class Equipment {
 		this.location = location;
 	}
    
-
+	public static void saveData(Equipment e) {
+		FileOutputStream fileOut = null;
+		ObjectOutputStream objOut = null;
+		
+		try {
+			fileOut = new FileOutputStream("company.ser");
+			objOut = new ObjectOutputStream(fileOut);
+			objOut.writeObject(e);
+			objOut.close();
+			fileOut.close();
+		}
+		
+		catch(IOException i) {
+			i.printStackTrace();
+		}
+	}
+	
+	public static Equipment loadData() {
+		FileInputStream fileIn = null;
+		ObjectInputStream objIn = null;
+		Equipment e1 = null;
+		
+		try {
+			fileIn = new FileInputStream("university.ser");
+			objIn = new ObjectInputStream(fileIn);
+			e1 = (Equipment) objIn.readObject();
+			objIn.close();
+			fileIn.close();
+		}
+		
+		catch (IOException i) {
+			i.printStackTrace();
+		}
+		
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return e1;
+	}
 
 }
