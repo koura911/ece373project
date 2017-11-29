@@ -8,7 +8,7 @@ import javax.swing.*;
 
 import system.company.Company;
 
-public class CompanyGUI extends JFrame {
+public class CompanyGUICustomer extends JFrame {
 	private Company co;
 	
 	private JMenuBar menuBar;
@@ -16,8 +16,7 @@ public class CompanyGUI extends JFrame {
 	private JMenu edit;
 	private JMenu plans;
 	private JMenu print;
-	private JMenu logout;
-	
+
 	private JMenuItem exit;
 	private JMenuItem editInformation;
 	private JMenuItem viewAvailablePlans;
@@ -27,7 +26,7 @@ public class CompanyGUI extends JFrame {
 	private JMenuItem save;
 	private JMenuItem load;
 	
-	public CompanyGUI(String string, Company co1) {
+	public CompanyGUICustomer(String string, Company co1) {
 		super(string);
 		
 		co = new Company();
