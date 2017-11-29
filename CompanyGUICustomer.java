@@ -60,8 +60,8 @@ public class CompanyGUICustomer extends JFrame {
 		signOut.addActionListener(new MenuListener());
 		file.add(save);
 		file.add(load);
-		file.add(exit);
 		file.add(signOut);
+		file.add(exit);
 		edit = new JMenu("Edit");
 		editInformation = new JMenuItem("Edit Information");
 		editInformation.addActionListener(new MenuListener());
@@ -95,7 +95,7 @@ public class CompanyGUICustomer extends JFrame {
 				
 			}
 			else if (source.equals(exit)) {
-				
+				System.exit(0);
 			}
 			else if (source.equals(signOut)) {
 				
@@ -113,5 +113,6 @@ public class CompanyGUICustomer extends JFrame {
 				
 			}
 		}
+	
 	}
 }
