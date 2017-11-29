@@ -7,9 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.university.people.Person;
-
-public class Person implements Serializable {
+ public class Person implements Serializable {
 
 	private String name;
 	private int userID;
