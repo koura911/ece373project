@@ -119,15 +119,23 @@ public class Customer extends Person{
 	public int checkSpeedUP() {
 		//INCOMPLETE
 		
-		if(this.speedDown+this.speedUp == r1.calcAvailData()) {
-			return;
+		//What does this method do? 
+		//calcAvailData() must equal speedDown + speedUP
+		//What int value should be return? 
+		//Where will this method be called? 
+		
+		
+		
+		/*if(this.speedDown+this.speedUp == r1.calcAvailData()) {
+			return ;
 		}
 		return r1.calcAvailData();
+		*/
 		
 	}
 	public int checkSpeedDown() {
 		//INCOMPLETE
 		
-		return r1.calcAvailData();
+		//return r1.calcAvailData();
 	}
 }
