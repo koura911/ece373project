@@ -1,11 +1,21 @@
 package system.people;
+import system.company.*;
+
+import system.hardware.*;
+
 
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
 import system.information.Location;
 import system.hardware.Equipment;
 import system.hardware.Radio;
+import system.information.*;
 
-public class Customer {
+
+
+public class Customer extends Person{
 
 	private Location location;
 	private ArrayList<Equipment> equip;
@@ -14,9 +24,13 @@ public class Customer {
 	private double price;
 	private double amtDue;
 	
+	
+	
+	private Company c;
+	
 	//shouldn't this class have a constructor?
 	public Customer() {
-		location = null;
+		location = new Location();
 		equip = new ArrayList<Equipment>();
 		speedUp = 0;
 		speedDown = 0;
@@ -54,10 +68,13 @@ public class Customer {
 		equip = e;
 	}
 	public void setUp(int i) {
-		speedUp = i;
+		
+			speedUp = i;
+	
 	}
 	public void setDown(int i) {
 		speedDown = i;
+		
 	}
 	public void setPrice(double d) {
 		price = d;
@@ -71,19 +88,46 @@ public class Customer {
 		//not sure what does in here. 
 		//is it suppose to look throught the customer equipment array
 		//or a different array in a different class?
+		//Radio r1 = new Radio();
+		//company equipment list find iteration of radio to see if it is an AP check the distance to it and find the smallest distance.
 		Radio r1 = new Radio();
+		Radio rTemp = new Radio();
+		Location lTemp = new Location();
 		
+		
+		double minDistance =10000.0, tempDist =0.0;
+		
+		int i;
+		for(i=0; i < c.equipmentList.size()-1; i++) {
+			if(c.equipmentList.get(i) instanceof Radio) {
+					rTemp = (Radio) c.equipmentList.get(i);
+				if(rTemp.isAP() == true) {
+					lTemp = rTemp.getLocation();
+					tempDist = lTemp.calcDistance(this.location);
+						if(tempDist < minDistance) {
+							minDistance = tempDist;
+							r1 = rTemp;
+					}
+				}
+			}
+			
+			
+		}
 		return r1;
 	}
 	
 	public int checkSpeedUP() {
 		//INCOMPLETE
 		
-		return 0;
+		if(this.speedDown+this.speedUp == r1.calcAvailData()) {
+			return;
+		}
+		return r1.calcAvailData();
+		
 	}
 	public int checkSpeedDown() {
 		//INCOMPLETE
 		
-		return 0;
+		return r1.calcAvailData();
 	}
 }
