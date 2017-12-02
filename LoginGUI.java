@@ -30,7 +30,8 @@ public class LoginGUI extends JFrame {
 	private Company c;
 	
 	
-	private LoginGUI(String windowTitle) {
+	public LoginGUI(String windowTitle) {
+		super(windowTitle);
 	setSize(600, 600);
 	setLayout(new FlowLayout(FlowLayout.LEFT));
 	add(new JLabel ("<HTML><center>Welcome to " + windowTitle + ". " + "<BR>Please Login in.</center></HTML>"));

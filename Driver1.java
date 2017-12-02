@@ -19,7 +19,11 @@ public class Driver1 {
 		Roster ro1 = new Roster();
 		Inventory i1 = new Inventory();
 		Company co = new Company();
+		Customer c1 = new Customer();
 		
+		c1.setName("Kaitlyn Oura");
+		c1.setUserID(8);
+		c1.setPswd("hello");
 		p1.setName("Kara Danvers");
 		p1.setUserID(01);
 		p2.setName("Lena Luthor");
@@ -31,6 +35,7 @@ public class Driver1 {
 		p5.setName("Winn Schott");
 		p5.setUserID(05);
 		
+		co.people.add(c1);
 		
 		e1.setSerialNumber("E33642RT456");
 		e1.setName("Bananas");
@@ -123,6 +128,7 @@ public class Driver1 {
 		ro1.generateRoster();
 		i1.generateInventoryReport();
 		
-		CompanyGUICustomer newGUI = new CompanyGUICustomer("University of Arizona", co);
+		//CompanyGUICustomer newGUI = new CompanyGUICustomer("University of Arizona", co);
+		LoginGUI newGUI = new LoginGUI("University of Arizona");
 	}
 }
