@@ -37,6 +37,7 @@ public class Driver1 {
 		
 		co.people.add(c1);
 		
+		
 		e1.setSerialNumber("E33642RT456");
 		e1.setName("Bananas");
 		e2.setName("Josh");
@@ -129,6 +130,6 @@ public class Driver1 {
 		i1.generateInventoryReport();
 		
 		//CompanyGUICustomer newGUI = new CompanyGUICustomer("University of Arizona", co);
-		LoginGUI newGUI = new LoginGUI("University of Arizona");
+		CompanyGUICustomer newGUI = new CompanyGUICustomer("University of Arizona", co);
 	}
 }

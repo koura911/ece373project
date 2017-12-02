@@ -10,7 +10,7 @@ import system.company.Company;
 
 public class CompanyGUICustomer extends JFrame {
 	private Company co;
-	
+	private JPanel panel = new JPanel(new GridLayout(0, 1));
 	private JMenuBar menuBar;
 	private JMenu file;
 	private JMenu edit;
@@ -25,25 +25,28 @@ public class CompanyGUICustomer extends JFrame {
 	private JMenuItem signOut;
 	private JMenuItem save;
 	private JMenuItem load;
+	private ImageIcon img = new ImageIcon("C:/Users/Oura9_000/Desktop/ECE_373_Project_Git/ece373project/icon.jpg");
 	
 	public CompanyGUICustomer(String string, Company co1) {
 		super(string);
 		
 		co = new Company();
 		
-		/*for (int i = 0; i < co1.equipmentList.size(); i++) {
+		for (int i = 0; i < co1.equipmentList.size(); i++) {
 			co.equipmentList.add(co1.equipmentList.get(i));
 		}
 		
 		for (int i = 0; i < co1.people.size(); i++) {
 			co.people.add(co1.people.get(i));
 		}
-		*/
+		
 		setSize(600, 600);
-		setLayout(new FlowLayout(FlowLayout.LEFT));
-		add(new JLabel ("<HTML><center>Welcome to " + string + ". " + "<BR>Choose an action from the above menus.</center></HTML>"));
+		setLayout(new BorderLayout());
+		setIconImage(img.getImage());
+		add(new JLabel ("<HTML><center>Welcome to " + string + ". " + "<BR>Choose an action from the above menus.</center></HTML>"), BorderLayout.CENTER);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		buildGUI();
+		add(panel, BorderLayout.WEST);
 		setVisible(true);
 	}
 	
@@ -82,6 +85,7 @@ public class CompanyGUICustomer extends JFrame {
 		menuBar.add(plans);
 		menuBar.add(print);
 		setJMenuBar(menuBar);
+		panel.add(menuBar, BorderLayout.WEST);
 	}
 	
 	private class MenuListener implements ActionListener {

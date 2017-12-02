@@ -72,6 +72,7 @@ public class Quote extends Form {
 			contentStream.endText();
 			contentStream.close();
 			quote.save("Quote_" + this.getPerson().getName() + ".pdf");
+			quote.close();
 		}
 		catch (IOException e) {
 			e.printStackTrace();

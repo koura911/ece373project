@@ -16,6 +16,11 @@ public class Company implements Serializable {
 	public ArrayList<Person> people;
 	public ArrayList<Equipment> equipmentList;
 	
+	public Company() {
+		people = new ArrayList<Person>();
+		equipmentList = new ArrayList<Equipment>();
+	}
+	
 	public static void saveData(Company c1) {
 		FileOutputStream fileOut = null;
 		ObjectOutputStream objOut = null;

@@ -80,6 +80,7 @@ public class Roster extends Report {
 			contentStream.endText();
 			contentStream.close();
 			roster.save("Roster.pdf");
+			roster.close();
 		}
 		catch (IOException e) {
 			e.printStackTrace();
