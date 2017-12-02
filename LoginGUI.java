@@ -107,7 +107,7 @@ public class LoginGUI extends JFrame {
 					}else {
 						//if the password is wrong
 						JOptionPane.showMessageDialog(null, 
-								"Password was incorecct", 
+								"Password was incorect", 
 								"Please try again", 
 								JOptionPane.PLAIN_MESSAGE);
 					}

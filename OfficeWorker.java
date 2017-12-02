@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import system.forms.*;
 
-public class OfficeWorker {
+public class OfficeWorker extends Person {
 
 		ArrayList<Report> reports;
 		private ArrayList<Form> forms;
