@@ -24,6 +24,9 @@ public class Driver1 {
 		c1.setName("Kaitlyn Oura");
 		c1.setUserID(8);
 		c1.setPswd("hello");
+		c1.setUp(6);
+		c1.setDown(18);
+		c1.setPrice(18.98);
 		p1.setName("Kara Danvers");
 		p1.setUserID(01);
 		p2.setName("Lena Luthor");
@@ -130,6 +133,6 @@ public class Driver1 {
 		i1.generateInventoryReport();
 		
 		//CompanyGUICustomer newGUI = new CompanyGUICustomer("University of Arizona", co);
-		CompanyGUICustomer newGUI = new CompanyGUICustomer("University of Arizona", co);
+		CompanyGUICustomer newGUI = new CompanyGUICustomer("University of Arizona", co, c1);
 	}
 }
