@@ -16,6 +16,7 @@ import system.people.Customer;
 /*
  * I need some clarification on why customer needs print quote when they already have a plan
  * Do we want print invoice to also print to a window? Or is the pdf generation enough?
+ * Is total amount due necessary for the invoice? We'd have to add functionalities for the customer class for it to keep track of the total due for the contract and when they pay to deduct the paid balances.
  */
 public class CompanyGUICustomer extends JFrame {
 	private Company co;
@@ -259,8 +260,18 @@ public class CompanyGUICustomer extends JFrame {
 			i1.setDueDate(user.getDueDate());
 			i1.setMinDue(user.getPrice());
 			i1.setTotalDue(user.getAmyDue());
-			
 			i1.generateInvoice();
+			JTextArea invoiceinfo = new JTextArea("Customer name: " + i1.getPerson().getName() + "\n\n" + "Amount due this cycle: $" + i1.getMinDue() + "\n\nTotal amount due for contract: $" + i1.getTotalDue() + "\n\nPayment due by: " + i1.getDueDate().getMonth() + "/" + i1.getDueDate().getDay() + "/" + i1.getDueDate().getYear());
+			JScrollPane invoicepane = new JScrollPane(invoiceinfo);
+			invoicepane.setPreferredSize(new Dimension(600, 600));
+			invoiceinfo.setLineWrap(true);
+			invoiceinfo.setWrapStyleWord(true);
+			invoiceinfo.setEditable(false);
+			invoiceinfo.setEditable(false);
+			//invoicepane.add(invoiceinfo);
+			invoicepane.setVisible(true);
+			invoicepane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+			JOptionPane.showMessageDialog(null, invoicepane, user.getName() + "'s Invoice", JOptionPane.PLAIN_MESSAGE);
 		}
 		
 		private void handlePrintQuote() {
