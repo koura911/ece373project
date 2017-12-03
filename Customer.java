@@ -25,7 +25,6 @@ public class Customer extends Person{
 	private double amtDue;
 	
 	
-	
 	private Company c;
 	
 	//shouldn't this class have a constructor?
