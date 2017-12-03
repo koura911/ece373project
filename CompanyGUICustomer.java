@@ -175,12 +175,12 @@ public class CompanyGUICustomer extends JFrame {
 		c.gridy = 0;
 		c.anchor = GridBagConstraints.FIRST_LINE_START;
 		Northpanel.add(menuBar, c);
-		Color ccc1 = new Color(247, 247,243);
+		Color ccc1 = new Color(238, 238,238);
 
 		Northpanel.setBackground(ccc1);
 		Northpanel.setVisible(true);
 		add(Northpanel, BorderLayout.NORTH);
-		setBackground(new Color(224, 224, 224));
+		setBackground(new Color(246, 243, 243));
 		JPanel nestedCenter = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		nestedCenter.setBackground(ccc1);
 		JTextArea textArea = new JTextArea("Welcome to " + string + ". Select an action from the menu bar.\n\n\n\nCustomer name:  " + user.getName() + "\n\nCurrent Plan:\n\tSpeed up:\t" + user.getUp() + " Mbps\n\tSpeed down:\t" + user.getDown() + " Mbps\n\nPrice:\t" + "$" + user.getPrice() +" per month\n\nEquipment:\n");
@@ -199,12 +199,14 @@ public class CompanyGUICustomer extends JFrame {
 		scrollPaneEquipment.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPaneEquipment.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
 		scrollPaneEquipment.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-
+		
 		nestedCenter.add(scrollPaneEquipment);
 		panel.add(nestedCenter, BorderLayout.CENTER);
-
+		ImageIcon cologo = new ImageIcon("C:/Users/Oura9_000/Desktop/ECE_373_Project_Git/ece373project/companylogo.png");
+		JLabel logoholder = new JLabel(cologo);
+		logoholder.setBackground(new Color(247, 247, 243));
 		add(panel, BorderLayout.CENTER);
-		
+		add(logoholder, BorderLayout.SOUTH);
 		setVisible(true);
 	}
 	
@@ -268,7 +270,6 @@ public class CompanyGUICustomer extends JFrame {
 			invoiceinfo.setWrapStyleWord(true);
 			invoiceinfo.setEditable(false);
 			invoiceinfo.setEditable(false);
-			//invoicepane.add(invoiceinfo);
 			invoicepane.setVisible(true);
 			invoicepane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 			JOptionPane.showMessageDialog(null, invoicepane, user.getName() + "'s Invoice", JOptionPane.PLAIN_MESSAGE);

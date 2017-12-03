@@ -68,7 +68,7 @@ public class Quote extends Form {
 			contentStream.newLine();
 			contentStream.showText("Available speed down: " + this.getAvailableSpeedDown() + " Mbps");
 			contentStream.newLine();
-			contentStream.showText("Price: $" + this.getPrice());
+			contentStream.showText("Price: $" + this.getPrice() + "per month");
 			contentStream.endText();
 			contentStream.close();
 			quote.save("Quote_" + this.getPerson().getName() + ".pdf");
