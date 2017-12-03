@@ -3,8 +3,11 @@ package system.software;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
 
 import system.company.Company;
 import system.people.Customer;
@@ -52,40 +55,124 @@ public class CompanyGUICustomer extends JFrame {
 		
 		menuBar = new VerticalMenuBar();
 		file = new JMenu("File");
+		final JPopupMenu popupfile = new JPopupMenu();
 		save = new JMenuItem("Save");
 		load = new JMenuItem("Load");
 		exit = new JMenuItem("Exit");
 		signOut = new JMenuItem("Sign Out");
+		file.setFont(new Font("Dialog", Font.PLAIN, 16));
+		save.setFont(new Font("Dialog", Font.PLAIN, 16));
+		load.setFont(new Font("Dialog", Font.PLAIN, 16));
+		exit.setFont(new Font("Dialog", Font.PLAIN, 16));
+		signOut.setFont(new Font("Dialog", Font.PLAIN, 16));
 		save.addActionListener(new MenuListener());
 		load.addActionListener(new MenuListener());
 		exit.addActionListener(new MenuListener());
 		signOut.addActionListener(new MenuListener());
-		file.add(save);
-		file.add(load);
-		file.add(signOut);
-		file.add(exit);
+		file.addActionListener(new MenuListener());
+		popupfile.add(save);
+		popupfile.add(load);
+		popupfile.add(signOut);
+		popupfile.add(exit);
+		file.add(popupfile);
+		final JPopupMenu popupedit = new JPopupMenu();
+		final JPopupMenu popupplans = new JPopupMenu();
+		final JPopupMenu popupprint = new JPopupMenu();
+		file.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (popupfile.isVisible()) {
+					popupfile.setVisible(false);
+				}
+				else {
+					popupfile.show(file, 51, 0);
+					popupedit.setVisible(false);
+					popupprint.setVisible(false);
+					popupplans.setVisible(false);
+				}
+			}
+		});
+		
 		edit = new JMenu("Edit");
+		edit.setFont(new Font("Dialog", Font.PLAIN, 16));
 		editInformation = new JMenuItem("Edit Information");
+		editInformation.setFont(new Font("Dialog", Font.PLAIN, 16));
 		editInformation.addActionListener(new MenuListener());
-		edit.add(editInformation);
+		popupedit.add(editInformation);
+		edit.add(popupedit);
+		edit.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (popupedit.isVisible()) {
+					popupedit.setVisible(false);
+				}
+				else {
+					popupedit.show(edit, 51, 0);
+					popupfile.setVisible(false);
+					popupprint.setVisible(false);
+					popupplans.setVisible(false);
+				}
+			}
+		});
 		plans = new JMenu("Plans");
+		plans.setFont(new Font("Dialog", Font.PLAIN, 16));
 		viewAvailablePlans = new JMenuItem("View Available Plans");
+		viewAvailablePlans.setFont(new Font("Dialog", Font.PLAIN, 16));
 		viewAvailablePlans.addActionListener(new MenuListener());
-		plans.add(viewAvailablePlans);
+		popupplans.add(viewAvailablePlans);
+		plans.add(popupplans);
+		plans.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (popupplans.isVisible()) {
+					popupplans.setVisible(false);
+				}
+				else {
+					popupplans.show(edit, 51, 25);
+					popupfile.setVisible(false);
+					popupedit.setVisible(false);
+					popupprint.setVisible(false);
+				}
+			}
+		});
 		print = new JMenu("Print");
+		print.setFont(new Font("Dialog", Font.PLAIN, 16));
 		printInvoice = new JMenuItem("Print Invoice");
+		printInvoice.setFont(new Font("Dialog", Font.PLAIN, 16));
 		printQuote = new JMenuItem("Print Quote");
+		printQuote.setFont(new Font("Dialog", Font.PLAIN, 16));
 		printInvoice.addActionListener(new MenuListener());
 		printQuote.addActionListener(new MenuListener());
-		print.add(printInvoice);
-		print.add(printQuote);
-	
+		popupprint.add(printInvoice);
+		popupprint.add(printQuote);
+		print.add(popupprint);
+		print.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (popupprint.isVisible()) {
+					popupprint.setVisible(false);
+				}
+				else {
+					popupprint.show(edit, 51, 49);
+					popupfile.setVisible(false);
+					popupedit.setVisible(false);
+					popupplans.setVisible(false);
+				}
+			}
+		});
+		menuBar.setFont(new Font("Dialog", Font.PLAIN, 16));
 		menuBar.add(file, 0,0 );
 		menuBar.add(edit, 0,1 );
 		menuBar.add(plans, 0,2 );
 		menuBar.add(print, 0,3 );
 		//setJMenuBar(menuBar);
-		add(menuBar, BorderLayout.NORTH);
+		JPanel Northpanel = new JPanel(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		c.weightx = 1.0;
+		c.weighty = 1.0;
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.FIRST_LINE_START;
+		Northpanel.add(menuBar, c);
+		
+		Northpanel.setVisible(true);
+		add(Northpanel, BorderLayout.NORTH);
 		
 		JPanel nestedCenter = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JLabel welcomeMessage = new JLabel("<html><br><br><br><br><br><br>Welcome to " + string + ".<br>Select an action from the menu bar." + "<br><br><br>Customer name: &nbsp;" + user.getName() + "<br>Current Plan:<br>" + "<font size = 20 face = Dialog> <table><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Speed up: </td><td>&nbsp;&nbsp;&nbsp;" + user.getUp() + " Mbps</td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Speed down: </td><td>&nbsp;&nbsp;" + user.getDown() +" Mbps</td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Price: </td><td>&nbsp;&nbsp;$" + user.getPrice() +"</td></tr></table>Equipment: <table><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Hello</td></tr></html>");
