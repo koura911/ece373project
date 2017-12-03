@@ -14,7 +14,12 @@ import system.hardware.Radio;
 import system.information.*;
 
 
-
+/*
+ * How is the show available plans supposed to work? Does someone need to add a function here to get this functionality for the customer?
+ * I can't finish the customerGUI until I know because we wanted something like that for the customer to be able to change plans.
+ * Can customer change their own plans if they can check available plans? Or does someone in the company have to do that?
+ * Should customer edits to their information be automatically saved and loaded in the application?
+ */
 public class Customer extends Person{
 
 	private Location location;

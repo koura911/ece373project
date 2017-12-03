@@ -12,6 +12,10 @@ import javax.swing.plaf.FontUIResource;
 import system.company.Company;
 import system.people.Customer;
 
+/*
+ * I need some clarification on why customer needs print quote when they already have a plan
+ * Do we want print invoice to also print to a window? Or is the pdf generation enough?
+ */
 public class CompanyGUICustomer extends JFrame {
 	private Company co;
 	private JPanel panel = new JPanel(new BorderLayout());
@@ -227,19 +231,35 @@ public class CompanyGUICustomer extends JFrame {
 				handleSignOut();
 			}
 			else if (source.equals(editInformation)) {
-				
+				handleEditInformation();
 			}
 			else if (source.equals(viewAvailablePlans)) {
-				
+				handleViewAvailablePlans();
 			}
 			else if (source.equals(printInvoice)) {
-				
+				handlePrintInvoice();
 			}
 			else if (source.equals(printQuote)) {
-				
+				handlePrintQuote();
 			}
 		}
 	
+		private void handleEditInformation() {
+			
+		}
+		
+		private void handleViewAvailablePlans() {
+			
+		}
+		
+		private void handlePrintInvoice() {
+			
+		}
+		
+		private void handlePrintQuote() {
+			
+		}
+		
 		private void handleSave(Company co1) {
 			Company.saveData(co1);
 		}
