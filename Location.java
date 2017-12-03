@@ -1,8 +1,14 @@
 package system.information;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.lang.Math;
 
-public class Location {
+public class Location implements Serializable {
 	
     private double  gpsLat;//should be entered as degrees decimal
     private double gpsLon;
@@ -59,5 +65,44 @@ public class Location {
 		
 	}
 
-
+	public static void saveData(Location l) {
+		FileOutputStream fileOut = null;
+		ObjectOutputStream objOut = null;
+		
+		try {
+			fileOut = new FileOutputStream("company.ser");
+			objOut = new ObjectOutputStream(fileOut);
+			objOut.writeObject(l);
+			objOut.close();
+			fileOut.close();
+		}
+		
+		catch(IOException i) {
+			i.printStackTrace();
+		}
+	}
+	
+	public static Location loadData() {
+		FileInputStream fileIn = null;
+		ObjectInputStream objIn = null;
+		Location l1 = null;
+		
+		try {
+			fileIn = new FileInputStream("company.ser");
+			objIn = new ObjectInputStream(fileIn);
+			l1 = (Location) objIn.readObject();
+			objIn.close();
+			fileIn.close();
+		}
+		
+		catch (IOException i) {
+			i.printStackTrace();
+		}
+		
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return l1;
+	}
 }

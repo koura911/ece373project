@@ -1,6 +1,13 @@
 package system.information;
 
-public class Date {
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class Date implements Serializable {
 	private int month;
 	private int day;
 	private int year;
@@ -45,5 +52,46 @@ public class Date {
 		String date = new String(month + "/" + day + "/" + year);
 		
 		return date;
+	}
+	
+	public static void saveData(Date d) {
+		FileOutputStream fileOut = null;
+		ObjectOutputStream objOut = null;
+		
+		try {
+			fileOut = new FileOutputStream("company.ser");
+			objOut = new ObjectOutputStream(fileOut);
+			objOut.writeObject(d);
+			objOut.close();
+			fileOut.close();
+		}
+		
+		catch(IOException i) {
+			i.printStackTrace();
+		}
+	}
+	
+	public static Date loadData() {
+		FileInputStream fileIn = null;
+		ObjectInputStream objIn = null;
+		Date d1 = null;
+		
+		try {
+			fileIn = new FileInputStream("comany.ser");
+			objIn = new ObjectInputStream(fileIn);
+			d1 = (Date) objIn.readObject();
+			objIn.close();
+			fileIn.close();
+		}
+		
+		catch (IOException i) {
+			i.printStackTrace();
+		}
+		
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return d1;
 	}
 }

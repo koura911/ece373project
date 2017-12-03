@@ -229,9 +229,11 @@ public class CompanyGUICustomer extends JFrame {
 				handleLoad();
 			}
 			else if (source.equals(exit)) {
+				Company.saveData(co);
 				System.exit(0);
 			}
 			else if (source.equals(signOut)) {
+				Company.saveData(co);
 				handleSignOut();
 			}
 			else if (source.equals(editInformation)) {
@@ -263,7 +265,7 @@ public class CompanyGUICustomer extends JFrame {
 			i1.setMinDue(user.getPrice());
 			i1.setTotalDue(user.getAmyDue());
 			i1.generateInvoice();
-			JTextArea invoiceinfo = new JTextArea("Customer name: " + i1.getPerson().getName() + "\n\n" + "Amount due this cycle: $" + i1.getMinDue() + "\n\nTotal amount due for contract: $" + i1.getTotalDue() + "\n\nPayment due by: " + i1.getDueDate().getMonth() + "/" + i1.getDueDate().getDay() + "/" + i1.getDueDate().getYear());
+			JTextArea invoiceinfo = new JTextArea("Customer name: " + i1.getPerson().getName() + "\n\n" + "Amount due this cycle: $" + i1.getMinDue() + "\n\nTotal amount due for contract: $" + i1.getTotalDue() + "\n\nPayment due by: " + i1.getDueDate().getDate());
 			JScrollPane invoicepane = new JScrollPane(invoiceinfo);
 			invoicepane.setPreferredSize(new Dimension(600, 600));
 			invoiceinfo.setLineWrap(true);
