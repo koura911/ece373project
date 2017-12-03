@@ -28,6 +28,7 @@ public class Customer extends Person{
 	private int speedDown;
 	private double price;
 	private double amtDue;
+	private Date dueDate;
 	
 	
 	private Company c;
@@ -36,10 +37,14 @@ public class Customer extends Person{
 	public Customer() {
 		location = new Location();
 		equip = new ArrayList<Equipment>();
+		dueDate = new Date();
 		speedUp = 0;
 		speedDown = 0;
 		price = 0.0;
 		amtDue = 0.0;
+		dueDate.setMonth(1);
+		dueDate.setDay(1);
+		dueDate.setYear(2017);
 	}
 	
 	//getting methods
@@ -61,13 +66,21 @@ public class Customer extends Person{
 	public double getAmyDue() {
 		return amtDue;
 	}
-	
+	public Date getDueDate() {
+		return dueDate;
+	}
 	
 	
 	//setting methods
 	public void setLoc(Location l) {
 		location = l;
 	}
+	public void setDueDate(int month, int day, int year) {
+		dueDate.setMonth(month);
+		dueDate.setDay(day);
+		dueDate.setYear(year);
+	}
+	
 	public void setEquip(ArrayList<Equipment> e) {
 		equip = e;
 	}

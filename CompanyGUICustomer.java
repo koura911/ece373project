@@ -10,6 +10,7 @@ import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 
 import system.company.Company;
+import system.forms.Invoice;
 import system.people.Customer;
 
 /*
@@ -253,7 +254,13 @@ public class CompanyGUICustomer extends JFrame {
 		}
 		
 		private void handlePrintInvoice() {
+			Invoice i1 = new Invoice();
+			i1.setPerson(user);
+			i1.setDueDate(user.getDueDate());
+			i1.setMinDue(user.getPrice());
+			i1.setTotalDue(user.getAmyDue());
 			
+			i1.generateInvoice();
 		}
 		
 		private void handlePrintQuote() {
