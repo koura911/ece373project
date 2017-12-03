@@ -60,11 +60,11 @@ public class CompanyGUICustomer extends JFrame {
 		load = new JMenuItem("Load");
 		exit = new JMenuItem("Exit");
 		signOut = new JMenuItem("Sign Out");
-		file.setFont(new Font("Dialog", Font.PLAIN, 16));
-		save.setFont(new Font("Dialog", Font.PLAIN, 16));
-		load.setFont(new Font("Dialog", Font.PLAIN, 16));
-		exit.setFont(new Font("Dialog", Font.PLAIN, 16));
-		signOut.setFont(new Font("Dialog", Font.PLAIN, 16));
+		file.setFont(new Font("Dialog", Font.PLAIN, 14));
+		save.setFont(new Font("Dialog", Font.PLAIN, 14));
+		load.setFont(new Font("Dialog", Font.PLAIN, 14));
+		exit.setFont(new Font("Dialog", Font.PLAIN, 14));
+		signOut.setFont(new Font("Dialog", Font.PLAIN, 14));
 		save.addActionListener(new MenuListener());
 		load.addActionListener(new MenuListener());
 		exit.addActionListener(new MenuListener());
@@ -84,7 +84,7 @@ public class CompanyGUICustomer extends JFrame {
 					popupfile.setVisible(false);
 				}
 				else {
-					popupfile.show(file, 51, 0);
+					popupfile.show(file, 47, 0);
 					popupedit.setVisible(false);
 					popupprint.setVisible(false);
 					popupplans.setVisible(false);
@@ -93,9 +93,9 @@ public class CompanyGUICustomer extends JFrame {
 		});
 		
 		edit = new JMenu("Edit");
-		edit.setFont(new Font("Dialog", Font.PLAIN, 16));
+		edit.setFont(new Font("Dialog", Font.PLAIN, 14));
 		editInformation = new JMenuItem("Edit Information");
-		editInformation.setFont(new Font("Dialog", Font.PLAIN, 16));
+		editInformation.setFont(new Font("Dialog", Font.PLAIN, 14));
 		editInformation.addActionListener(new MenuListener());
 		popupedit.add(editInformation);
 		edit.add(popupedit);
@@ -105,7 +105,7 @@ public class CompanyGUICustomer extends JFrame {
 					popupedit.setVisible(false);
 				}
 				else {
-					popupedit.show(edit, 51, 0);
+					popupedit.show(edit, 47, 0);
 					popupfile.setVisible(false);
 					popupprint.setVisible(false);
 					popupplans.setVisible(false);
@@ -113,9 +113,9 @@ public class CompanyGUICustomer extends JFrame {
 			}
 		});
 		plans = new JMenu("Plans");
-		plans.setFont(new Font("Dialog", Font.PLAIN, 16));
+		plans.setFont(new Font("Dialog", Font.PLAIN, 14));
 		viewAvailablePlans = new JMenuItem("View Available Plans");
-		viewAvailablePlans.setFont(new Font("Dialog", Font.PLAIN, 16));
+		viewAvailablePlans.setFont(new Font("Dialog", Font.PLAIN, 14));
 		viewAvailablePlans.addActionListener(new MenuListener());
 		popupplans.add(viewAvailablePlans);
 		plans.add(popupplans);
@@ -125,7 +125,7 @@ public class CompanyGUICustomer extends JFrame {
 					popupplans.setVisible(false);
 				}
 				else {
-					popupplans.show(edit, 51, 25);
+					popupplans.show(edit, 47, 25);
 					popupfile.setVisible(false);
 					popupedit.setVisible(false);
 					popupprint.setVisible(false);
@@ -133,11 +133,11 @@ public class CompanyGUICustomer extends JFrame {
 			}
 		});
 		print = new JMenu("Print");
-		print.setFont(new Font("Dialog", Font.PLAIN, 16));
+		print.setFont(new Font("Dialog", Font.PLAIN, 14));
 		printInvoice = new JMenuItem("Print Invoice");
-		printInvoice.setFont(new Font("Dialog", Font.PLAIN, 16));
+		printInvoice.setFont(new Font("Dialog", Font.PLAIN, 14));
 		printQuote = new JMenuItem("Print Quote");
-		printQuote.setFont(new Font("Dialog", Font.PLAIN, 16));
+		printQuote.setFont(new Font("Dialog", Font.PLAIN, 14));
 		printInvoice.addActionListener(new MenuListener());
 		printQuote.addActionListener(new MenuListener());
 		popupprint.add(printInvoice);
@@ -149,7 +149,7 @@ public class CompanyGUICustomer extends JFrame {
 					popupprint.setVisible(false);
 				}
 				else {
-					popupprint.show(edit, 51, 49);
+					popupprint.show(edit, 47, 49);
 					popupfile.setVisible(false);
 					popupedit.setVisible(false);
 					popupplans.setVisible(false);
@@ -161,7 +161,6 @@ public class CompanyGUICustomer extends JFrame {
 		menuBar.add(edit, 0,1 );
 		menuBar.add(plans, 0,2 );
 		menuBar.add(print, 0,3 );
-		//setJMenuBar(menuBar);
 		JPanel Northpanel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.weightx = 1.0;
@@ -170,19 +169,34 @@ public class CompanyGUICustomer extends JFrame {
 		c.gridy = 0;
 		c.anchor = GridBagConstraints.FIRST_LINE_START;
 		Northpanel.add(menuBar, c);
-		
+		Color ccc1 = new Color(247, 247,243);
+
+		Northpanel.setBackground(ccc1);
 		Northpanel.setVisible(true);
 		add(Northpanel, BorderLayout.NORTH);
-		
+		setBackground(new Color(224, 224, 224));
 		JPanel nestedCenter = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		JLabel welcomeMessage = new JLabel("<html><br><br><br><br><br><br>Welcome to " + string + ".<br>Select an action from the menu bar." + "<br><br><br>Customer name: &nbsp;" + user.getName() + "<br>Current Plan:<br>" + "<font size = 20 face = Dialog> <table><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Speed up: </td><td>&nbsp;&nbsp;&nbsp;" + user.getUp() + " Mbps</td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Speed down: </td><td>&nbsp;&nbsp;" + user.getDown() +" Mbps</td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Price: </td><td>&nbsp;&nbsp;$" + user.getPrice() +"</td></tr></table>Equipment: <table><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Hello</td></tr></html>");
-		
-		welcomeMessage.setFont(new Font("Dialog", Font.PLAIN, 20));
-		welcomeMessage.setHorizontalAlignment(JLabel.CENTER);
-		welcomeMessage.setVerticalAlignment(JLabel.CENTER);
-		nestedCenter.add(welcomeMessage);
+		nestedCenter.setBackground(ccc1);
+		JTextArea textArea = new JTextArea("Welcome to " + string + ". Select an action from the menu bar.\n\n\n\nCustomer name:  " + user.getName() + "\n\nCurrent Plan:\n\tSpeed up:\t" + user.getUp() + " Mbps\n\tSpeed down:\t" + user.getDown() + " Mbps\n\nPrice:\t" + "$" + user.getPrice() +" per month\n\nEquipment:\n");
+		JScrollPane scrollPaneEquipment = new JScrollPane(textArea);
+		textArea.setFont(new Font("Dialog", Font.PLAIN, 16));
 
+		for (int i = 0; i < user.getEquip().size(); i++) {
+			textArea.append("\tName:\t   " + user.getEquip().get(i).getName() + "\n\tBrand:\t   " + user.getEquip().get(i).getBrand() + "\n\tModel:\t   " + user.getEquip().get(i).getModel() + "\n\tSerial Number:  " + user.getEquip().get(i).getSerialNumber() + "\n\n");
+		}
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
+		textArea.setEditable(false);
+		scrollPaneEquipment.setBorder(null);
+		textArea.setBackground(ccc1);
+		scrollPaneEquipment.setPreferredSize(new Dimension(600, 800));
+		scrollPaneEquipment.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPaneEquipment.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
+		scrollPaneEquipment.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+		nestedCenter.add(scrollPaneEquipment);
 		panel.add(nestedCenter, BorderLayout.CENTER);
+
 		add(panel, BorderLayout.CENTER);
 		
 		setVisible(true);

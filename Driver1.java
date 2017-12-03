@@ -27,6 +27,7 @@ public class Driver1 {
 		c1.setUp(6);
 		c1.setDown(18);
 		c1.setPrice(18.98);
+		
 		p1.setName("Kara Danvers");
 		p1.setUserID(01);
 		p2.setName("Lena Luthor");
@@ -47,6 +48,8 @@ public class Driver1 {
 		e2.setSerialNumber("R3375FT965");
 		e1.setBrand("Garlic");
 		e1.setModel("Highlighter");
+		c1.getEquip().add(e1);
+		c1.getEquip().add(e2);
 		Date e1d = new Date();
 		e1d.setMonth(6);
 		e1d.setDay(12);
