@@ -18,10 +18,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
-/*
- * you need to load the company into the gui Company c;
- * LoginGUI(String windowTitle, Company c1)
- */
+
 public class LoginGUI extends JFrame {
 
 	private JFrame frame;
@@ -29,59 +26,74 @@ public class LoginGUI extends JFrame {
 	private JPasswordField passwordField;
 	private JFrame login_Window;
 
+	private JLabel usernameLabel;
+	private JLabel PasswordLabel;
+	
 	private Person user;
 	private Company c;
 	
 	
-	public LoginGUI(String windowTitle, Company c1) {
-		super(windowTitle);
-	setSize(600, 600);
-	
-	c = new Company();
-	user = new Customer();
-	
-	for (int i = 0; i < c1.equipmentList.size(); i++) {
-		c.equipmentList.add(c1.equipmentList.get(i));
-	}
-	for (int i = 0; i < c1.people.size(); i++) {
-		c.people.add(c1.people.get(i));
-	}
-	
-	
-	setLayout(new FlowLayout(FlowLayout.LEFT));
-	add(new JLabel ("<HTML><center>Welcome to " + windowTitle + ". " + "<BR>Please Login in.</center></HTML>"));
+	LoginGUI(String windowTitle) {
+		
+	/*setSize(600, 600);
+	setLayout(new FlowLayout(FlowLayout.CENTER));
+	add(new JLabel ("<HTML><center>Welcome to WISP " + windowTitle + ". " + "<BR>Please Login in</center></HTML>"));
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+	*/
 	buildGUI();
 	setVisible(true);
+	
+	
 	}
+	
 	
 	
 	public void buildGUI() {
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frame.setLayout(null);
+		//frame.setVisible(true);
 		
-		JLabel usernameLabel = new JLabel("Username:");
+		//frame.setLayout(new FlowLayout(FlowLayout.CENTER));
+		
+		
+		
+		usernameLabel = new JLabel("Username:");
 		usernameLabel.setBounds(39, 89, 72, 16);
-		frame.getContentPane().add(usernameLabel);
 		
-		JLabel PasswordLabel = new JLabel("Password:");
+		frame.add(usernameLabel);
+		frame.setVisible(true);
+		
+		
+		
+		PasswordLabel = new JLabel("Password:");
 		PasswordLabel.setBounds(39, 133, 72, 16);
-		frame.getContentPane().add(PasswordLabel);
+		frame.add(PasswordLabel);
+		PasswordLabel.setVisible(true);
 		
 		JLabel loginLabel = new JLabel("Login");
 		loginLabel.setBounds(191, 20, 61, 16);
-		frame.getContentPane().add(loginLabel);
+		//frame.getContentPane().add(loginLabel);
+		frame.add(loginLabel);
+		
 		
 		usernameField = new JTextField();
 		usernameField.setBounds(160, 84, 130, 26);
-		frame.getContentPane().add(usernameField);
+		frame.add(usernameField);
 		usernameField.setColumns(10);
+		usernameField.setBackground(Color.LIGHT_GRAY);
+		
+		
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(159, 128, 131, 26);
-		frame.getContentPane().add(passwordField);
+		frame.add(passwordField);
+		passwordField.setColumns(10);
+		passwordField.setBackground(Color.LIGHT_GRAY);
+		
 		
 		JButton loginButton = new JButton("Login");
 		loginButton.addActionListener(new ActionListener() {
@@ -123,7 +135,7 @@ public class LoginGUI extends JFrame {
 					}else {
 						//if the password is wrong
 						JOptionPane.showMessageDialog(null, 
-								"Password was incorect", 
+								"Password was incorecct", 
 								"Please try again", 
 								JOptionPane.PLAIN_MESSAGE);
 					}
@@ -133,7 +145,7 @@ public class LoginGUI extends JFrame {
 			}
 		});
 		loginButton.setBounds(65, 205, 117, 29);
-		frame.getContentPane().add(loginButton);
+		frame.add(loginButton);
 		
 		JButton exitButton = new JButton("Exit");
 		exitButton.addActionListener(new ActionListener() {
@@ -147,7 +159,7 @@ public class LoginGUI extends JFrame {
 			}
 		});
 		exitButton.setBounds(267, 205, 117, 29);
-		frame.getContentPane().add(exitButton);
+		frame.add(exitButton);
 	
 
 		
