@@ -322,10 +322,18 @@ public class CompanyGUICustomer extends JFrame {
 			
 			JPanel customerinfoedit = new JPanel(new GridLayout(0, 2));
 			JPanel customercurrentinfo = new JPanel(new FlowLayout(FlowLayout.LEFT));
-			JTextArea customerinfotext = new JTextArea("Name: " + user.getName() + "\nPassword: " + user.getPswd());
+			JTextArea customerinfotext = new JTextArea("\tName: " + user.getName() + "\n\tPassword: " + user.getPswd());
+			customerinfotext.setBackground(new Color(238, 238, 238));
+			customerinfotext.setFont(new Font("Dialog", Font.PLAIN, 14));
+			customerinfotext.setSize(new Dimension(600, 600));
 			customerinfotext.setLineWrap(true);
 			customerinfotext.setWrapStyleWord(true);
 			customerinfotext.setEditable(false);
+			customercurrentinfo.add(customerinfotext);
+			customerinfoedit.add(customercurrentinfo, 0,0);
+			JPanel customerinfonew = new JPanel();
+			customerinfonew.add(customerinfotext);
+			customerinfoedit.add(customerinfonew, 0,1);
 			editinfo.add(customerinfoedit, BorderLayout.CENTER);
 		}
 		
@@ -333,6 +341,8 @@ public class CompanyGUICustomer extends JFrame {
 			//use checkSpeedUp checkSpeedDown and use that show available plans
 			//+$10 per 5mbps increase in plans
 		}
+		
+		
 		
 		private void handlePrintInvoice() {
 			JFrame invoice = new JFrame();

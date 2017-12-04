@@ -24,7 +24,7 @@ public class Customer extends Person{
 	private double price;
 	private double amtDue;
 	private String address;
-	private Date dueDate;
+	private Date dueDate = new Date();
 	
 	
 	
