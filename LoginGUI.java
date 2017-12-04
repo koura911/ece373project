@@ -30,10 +30,11 @@ public class LoginGUI extends JFrame {
 	private JLabel PasswordLabel;
 	
 	private Person user;
-	private Company c;
+	private Company c1 = new Company();
 	
 	
-	LoginGUI(String windowTitle) {
+	
+	LoginGUI(String windowTitle, Company c) {
 		
 	/*setSize(600, 600);
 	setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -42,8 +43,14 @@ public class LoginGUI extends JFrame {
 	
 	*/
 	buildGUI();
-	setVisible(true);
-	
+	//setVisible(true);
+	int i;
+	for(i =0; i<= c.people.size(); i++) {
+		c1.addPeople(c.people.get(i));
+	}
+	for(i =0; i <= c.equipmentList.size(); i++) {
+		c1.addEquipment(c.equipmentList.get(i));
+	}
 	
 	}
 	
@@ -65,7 +72,8 @@ public class LoginGUI extends JFrame {
 		usernameLabel.setBounds(39, 89, 72, 16);
 		
 		frame.add(usernameLabel);
-		frame.setVisible(true);
+		//frame.setVisible(true);
+		usernameLabel.setVisible(true);
 		
 		
 		
@@ -78,6 +86,7 @@ public class LoginGUI extends JFrame {
 		loginLabel.setBounds(191, 20, 61, 16);
 		//frame.getContentPane().add(loginLabel);
 		frame.add(loginLabel);
+		loginLabel.setVisible(true);
 		
 		
 		usernameField = new JTextField();
@@ -105,10 +114,11 @@ public class LoginGUI extends JFrame {
 				
 				int i;
 				boolean activeUser = false;
-				for(i=0; i< c.people.size(); i++) {
-					if(c.people.get(i).equals(user)) {
+				for(i=0; i< c1.people.size(); i++) {
+					if(c1.people.get(i).equals(user)) {
 						activeUser = true;
-						user = c.people.get(i);
+						user = (Person)c1.people.get(i);
+						
 					}else {
 						JOptionPane.showMessageDialog(null, 
 								"This username is not associated with an account", 
@@ -161,7 +171,7 @@ public class LoginGUI extends JFrame {
 		exitButton.setBounds(267, 205, 117, 29);
 		frame.add(exitButton);
 	
-
+		frame.setVisible(true);
 		
 		
 	}
