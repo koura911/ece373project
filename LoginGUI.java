@@ -109,13 +109,13 @@ public class LoginGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				 user = new Person();
 				
-				user.setUserID(Integer.parseInt(passwordField.getText()));
+				user.setUserID(Integer.parseInt(usernameField.getText()));
 				String password = passwordField.getText();
 				
 				int i;
 				boolean activeUser = false;
 				for(i=0; i< c1.people.size(); i++) {
-					if(c1.people.get(i).equals(user)) {
+					if(c1.people.get(i).getUserID() == user.getUserID()) {
 						activeUser = true;
 						user = (Person)c1.people.get(i);
 						
@@ -132,7 +132,8 @@ public class LoginGUI extends JFrame {
 					if(user.checkPswd(password) == true) {
 						//If the password is correct
 						if(user instanceof Customer) {
-							//FILL IN Customer GUI
+							//CompanyGUICustomer(String string, Company co1, Customer c1)
+							CompanyGUICustomer return0 = new CompanyGUICustomer("Customer",c1,(Customer)user);
 						}else if(user instanceof Employee) {
 							//FILL IN Employee GUI
 						}else if(user instanceof Admin) {
@@ -148,6 +149,7 @@ public class LoginGUI extends JFrame {
 								"Password was incorecct", 
 								"Please try again", 
 								JOptionPane.PLAIN_MESSAGE);
+						LoginGUI return6 = new LoginGUI("Login", c1);
 					}
 					
 					
