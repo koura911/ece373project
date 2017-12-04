@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import javax.swing.JOptionPane;
 
 
 import system.hardware.*;
@@ -35,12 +36,35 @@ public class Company implements Serializable {
 
 	public void rmvPeople(Person p) {
 		// check if it is in there first
-		people.remove(p);
+		int i;
+		boolean flag = false;
+		for(i = 0; i<= people.size(); i++) {
+			if(people.get(i).equals(p)) {
+				flag = true;
+			}
+		}
+		if(flag == true) {
+			people.remove(p);
+		}else {
+			JOptionPane.showMessageDialog(null, "Cannot remove "+ p+ " from People list.");
+		}
 	}
 
 	public void rmvEquipment(Equipment e) {
 		//check if it in there first
+		int i;
+		boolean flag = false;
+		for(i=0; i<= equipmentList.size(); i++) {
+			if(equipmentList.get(i).equals(e)) {
+				flag = true;
+			}
+			
+		}
+		if(flag == true) {
 		equipmentList.remove(e);
+		}else {
+			JOptionPane.showMessageDialog(null, "Cannot remove "+ e+ " from Equipment List.");
+		}
 	}
 	
 	public Company getComp() {
