@@ -66,22 +66,14 @@ public class CompanyGUICustomer extends JFrame {
 		menuBar = new VerticalMenuBar();
 		file = new JMenu("File");
 		popupfile = new JPopupMenu();
-		//save = new JMenuItem("Save");
-		//load = new JMenuItem("Load");
 		exit = new JMenuItem("Exit");
 		signOut = new JMenuItem("Sign Out");
 		file.setFont(new Font("Dialog", Font.PLAIN, 14));
-		//save.setFont(new Font("Dialog", Font.PLAIN, 14));
-		//load.setFont(new Font("Dialog", Font.PLAIN, 14));
 		exit.setFont(new Font("Dialog", Font.PLAIN, 14));
 		signOut.setFont(new Font("Dialog", Font.PLAIN, 14));
-		//save.addActionListener(new MenuListener());
-		//load.addActionListener(new MenuListener());
 		exit.addActionListener(new MenuListener());
 		signOut.addActionListener(new MenuListener());
 		file.addActionListener(new MenuListener());
-		//popupfile.add(save);
-		//popupfile.add(load);
 		popupfile.add(signOut);
 		popupfile.add(exit);
 		file.add(popupfile);
@@ -227,25 +219,15 @@ public class CompanyGUICustomer extends JFrame {
 	private class MenuListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			JMenuItem source = (JMenuItem)(e.getSource());
-			
-			/*if (source.equals(save)) {
-				popupfile.setVisible(false);
-				handleSave(co);
-			}
-			else if (source.equals(load)) {
-				popupfile.setVisible(false);
-				handleLoad();
-			}*/
+
 			if (source.equals(exit)) {
 				popupfile.setVisible(false);
 				Company.saveData(co);
-				co = handleLoad();
+				co = Company.loadData();
 				System.exit(0);
 			}
 			else if (source.equals(signOut)) {
 				popupfile.setVisible(false);
-				Company.saveData(co);
-				co = handleLoad();
 				handleSignOut();
 			}
 			else if (source.equals(editInformation)) {
@@ -267,6 +249,46 @@ public class CompanyGUICustomer extends JFrame {
 		}
 	
 		private void handleEditInformation() {
+			JFrame editinfo = new JFrame();
+			Dimension screenSize1 = Toolkit.getDefaultToolkit().getScreenSize();
+			editinfo.setSize(screenSize1.width, screenSize1.height);
+			editinfo.setLayout(new BorderLayout());
+			editinfo.setIconImage(img.getImage());
+			editinfo.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			setResizable(false);
+			
+			JMenuBar menuBar1 = new VerticalMenuBar();
+			final JPopupMenu popupfile1 = new JPopupMenu();
+			final JPopupMenu popupplans1 = new JPopupMenu();
+			final JPopupMenu popupprint1 = new JPopupMenu();
+			JMenu file1 = new JMenu("File");
+			JMenuItem exit1 = new JMenuItem("Exit");
+			JMenuItem signOut1 = new JMenuItem("Sign Out");
+			exit1.addActionListener(new MenuListener());
+			signOut1.addActionListener(new MenuListener());
+			file1.setFont(new Font("Dialog", Font.PLAIN, 14));
+			exit1.setFont(new Font("Dialog", Font.PLAIN, 14));
+			signOut1.setFont(new Font("Dialog", Font.PLAIN, 14));
+			file1.add(popupfile1);
+			file.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					if (popupfile1.isVisible()) {
+						popupfile1.setVisible(false);
+					}
+					else {
+						popupfile1.show(file, 47, 0);
+						popupplans1.setVisible(false);
+						popupprint1.setVisible(false);
+					}
+				}
+			});
+			
+			JMenu plans1 = new JMenu("Plans");
+			plans1.setFont(new Font("Dialog", Font.PLAIN, 14));
+			JMenuItem viewAvailablePlans1 = new JMenuItem("View Available Plans");
+			viewAvailablePlans1.setFont(new Font("Dialog", Font.PLAIN, 14));
+			viewAvailablePlans1.addActionListener(new MenuListener());
+			popupplans1.add(viewAvailablePlans1);
 			
 		}
 		

@@ -7,6 +7,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/*
+ * shouldn't person have: billing address, phone, email address?
+ */
  public class Person implements Serializable {
 
 	private String name;
