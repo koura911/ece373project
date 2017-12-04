@@ -339,7 +339,7 @@ public class CompanyGUICustomer extends JFrame {
 			Company.saveData(co);
 			co = new Company();
 			co = Company.loadData();
-			LoginGUI return1 = new LoginGUI("The University of Arizona", co);
+			LoginGUI return1 = new LoginGUI("The University of Arizona");
 		}
 	}
 }
