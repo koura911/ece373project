@@ -18,7 +18,10 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
-
+/*
+ * you need to load the company into the gui Company c;
+ * LoginGUI(String windowTitle, Company c1)
+ */
 public class LoginGUI extends JFrame {
 
 	private JFrame frame;
@@ -30,9 +33,21 @@ public class LoginGUI extends JFrame {
 	private Company c;
 	
 	
-	public LoginGUI(String windowTitle) {
+	public LoginGUI(String windowTitle, Company c1) {
 		super(windowTitle);
 	setSize(600, 600);
+	
+	c = new Company();
+	user = new Customer();
+	
+	for (int i = 0; i < c1.equipmentList.size(); i++) {
+		c.equipmentList.add(c1.equipmentList.get(i));
+	}
+	for (int i = 0; i < c1.people.size(); i++) {
+		c.people.add(c1.people.get(i));
+	}
+	
+	
 	setLayout(new FlowLayout(FlowLayout.LEFT));
 	add(new JLabel ("<HTML><center>Welcome to " + windowTitle + ". " + "<BR>Please Login in.</center></HTML>"));
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

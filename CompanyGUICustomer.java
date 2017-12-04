@@ -38,8 +38,8 @@ public class CompanyGUICustomer extends JFrame {
 	private JMenuItem printInvoice;
 	private JMenuItem printQuote;
 	private JMenuItem signOut;
-	private JMenuItem save;
-	private JMenuItem load;
+	//private JMenuItem save;
+	//private JMenuItem load;
 	private ImageIcon img = new ImageIcon("C:/Users/Oura9_000/Desktop/ECE_373_Project_Git/ece373project/icon.jpg");
 	
 	public CompanyGUICustomer(String string, Company co1, Customer c1) {
@@ -66,22 +66,22 @@ public class CompanyGUICustomer extends JFrame {
 		menuBar = new VerticalMenuBar();
 		file = new JMenu("File");
 		popupfile = new JPopupMenu();
-		save = new JMenuItem("Save");
-		load = new JMenuItem("Load");
+		//save = new JMenuItem("Save");
+		//load = new JMenuItem("Load");
 		exit = new JMenuItem("Exit");
 		signOut = new JMenuItem("Sign Out");
 		file.setFont(new Font("Dialog", Font.PLAIN, 14));
-		save.setFont(new Font("Dialog", Font.PLAIN, 14));
-		load.setFont(new Font("Dialog", Font.PLAIN, 14));
+		//save.setFont(new Font("Dialog", Font.PLAIN, 14));
+		//load.setFont(new Font("Dialog", Font.PLAIN, 14));
 		exit.setFont(new Font("Dialog", Font.PLAIN, 14));
 		signOut.setFont(new Font("Dialog", Font.PLAIN, 14));
-		save.addActionListener(new MenuListener());
-		load.addActionListener(new MenuListener());
+		//save.addActionListener(new MenuListener());
+		//load.addActionListener(new MenuListener());
 		exit.addActionListener(new MenuListener());
 		signOut.addActionListener(new MenuListener());
 		file.addActionListener(new MenuListener());
-		popupfile.add(save);
-		popupfile.add(load);
+		//popupfile.add(save);
+		//popupfile.add(load);
 		popupfile.add(signOut);
 		popupfile.add(exit);
 		file.add(popupfile);
@@ -228,15 +228,15 @@ public class CompanyGUICustomer extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			JMenuItem source = (JMenuItem)(e.getSource());
 			
-			if (source.equals(save)) {
+			/*if (source.equals(save)) {
 				popupfile.setVisible(false);
 				handleSave(co);
 			}
 			else if (source.equals(load)) {
 				popupfile.setVisible(false);
 				handleLoad();
-			}
-			else if (source.equals(exit)) {
+			}*/
+			if (source.equals(exit)) {
 				popupfile.setVisible(false);
 				Company.saveData(co);
 				co = handleLoad();
@@ -271,7 +271,8 @@ public class CompanyGUICustomer extends JFrame {
 		}
 		
 		private void handleViewAvailablePlans() {
-			
+			//use checkSpeedUp checkSpeedDown and use that show available plans
+			//+$10 per 5mbps increase in plans
 		}
 		
 		private void handlePrintInvoice() {
@@ -300,7 +301,7 @@ public class CompanyGUICustomer extends JFrame {
 			
 		}
 		
-		private void handleSave(Company co1) {
+		/*private void handleSave(Company co1) {
 			Company.saveData(co1);
 		}
 		
@@ -309,11 +310,14 @@ public class CompanyGUICustomer extends JFrame {
 			co = Company.loadData();
 			
 			return co;
-		}
+		}*/
 		
 		private void handleSignOut() {
 			dispose();
-			LoginGUI return1 = new LoginGUI("The University of Arizona");
+			Company.saveData(co);
+			co = new Company();
+			co = Company.loadData();
+			LoginGUI return1 = new LoginGUI("The University of Arizona", co);
 		}
 	}
 }
