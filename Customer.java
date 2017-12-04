@@ -14,12 +14,7 @@ import system.hardware.Radio;
 import system.information.*;
 
 
-/*
- * How is the show available plans supposed to work? Does someone need to add a function here to get this functionality for the customer?
- * I can't finish the customerGUI until I know because we wanted something like that for the customer to be able to change plans.
- * Can customer change their own plans if they can check available plans? Or does someone in the company have to do that?
- * Should customer edits to their information be automatically saved and loaded in the application?
- */
+
 public class Customer extends Person{
 
 	private Location location;
@@ -28,7 +23,9 @@ public class Customer extends Person{
 	private int speedDown;
 	private double price;
 	private double amtDue;
+	private String address;
 	private Date dueDate;
+	
 	
 	
 	private Company c;
@@ -37,11 +34,11 @@ public class Customer extends Person{
 	public Customer() {
 		location = new Location();
 		equip = new ArrayList<Equipment>();
-		dueDate = new Date();
 		speedUp = 0;
 		speedDown = 0;
 		price = 0.0;
-		amtDue = 0.00;
+		amtDue = 0.0;
+		address = null;
 		dueDate.setMonth(1);
 		dueDate.setDay(1);
 		dueDate.setYear(2017);
@@ -63,12 +60,17 @@ public class Customer extends Person{
 	public double getPrice() {
 		return price;
 	}
-	public double getAmyDue() {
+	public double getAmtDue() {
 		return amtDue;
+	}
+	public String getAddress() {
+		return address;
 	}
 	public Date getDueDate() {
 		return dueDate;
 	}
+	
+	
 	
 	
 	//setting methods
@@ -98,6 +100,9 @@ public class Customer extends Person{
 	}
 	public void setAmtDue(double d) {
 		amtDue = d;
+	}
+	public void setAddress(String a) {
+		address = a;
 	}
 	
 	
@@ -133,26 +138,5 @@ public class Customer extends Person{
 		return r1;
 	}
 	
-	public int checkSpeedUP() {
-		//INCOMPLETE
-		
-		//What does this method do? 
-		//calcAvailData() must equal speedDown + speedUP
-		//What int value should be return? 
-		//Where will this method be called? 
-		
-		
-		
-		/*if(this.speedDown+this.speedUp == r1.calcAvailData()) {
-			return ;
-		}
-		return r1.calcAvailData();
-		*/
-		
-	}
-	public int checkSpeedDown() {
-		//INCOMPLETE
-		
-		//return r1.calcAvailData();
-	}
+	
 }

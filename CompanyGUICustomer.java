@@ -340,7 +340,7 @@ public class CompanyGUICustomer extends JFrame {
 			i1.setPerson(user);
 			i1.setDueDate(user.getDueDate());
 			i1.setMinDue(user.getPrice());
-			i1.setTotalDue(user.getAmyDue());
+			i1.setTotalDue(user.getAmtDue());
 			i1.generateInvoice();
 			invoice.setVisible(true);
 			invoice.setSize(600, 600);
