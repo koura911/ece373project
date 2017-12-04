@@ -20,13 +20,13 @@ import system.people.Customer;
  */
 public class CompanyGUICustomer extends JFrame {
 	private Company co;
+	private JFrame editinfo = new JFrame();
 	private final JPopupMenu popupfile;
 	private final JPopupMenu popupedit;
 	private final JPopupMenu popupplans;
 	private final JPopupMenu popupprint;
 	private JPanel panel = new JPanel(new BorderLayout());
 	private JMenuBar menuBar;
-	private JMenu menu;
 	private JMenu file;
 	private JMenu edit;
 	private JMenu plans;
@@ -36,10 +36,7 @@ public class CompanyGUICustomer extends JFrame {
 	private JMenuItem editInformation;
 	private JMenuItem viewAvailablePlans;
 	private JMenuItem printInvoice;
-	private JMenuItem printQuote;
 	private JMenuItem signOut;
-	//private JMenuItem save;
-	//private JMenuItem load;
 	private ImageIcon img = new ImageIcon("C:/Users/Oura9_000/Desktop/ECE_373_Project_Git/ece373project/icon.jpg");
 	
 	public CompanyGUICustomer(String string, Company co1, Customer c1) {
@@ -139,12 +136,8 @@ public class CompanyGUICustomer extends JFrame {
 		print.setFont(new Font("Dialog", Font.PLAIN, 14));
 		printInvoice = new JMenuItem("Print Invoice");
 		printInvoice.setFont(new Font("Dialog", Font.PLAIN, 14));
-		printQuote = new JMenuItem("Print Quote");
-		printQuote.setFont(new Font("Dialog", Font.PLAIN, 14));
 		printInvoice.addActionListener(new MenuListener());
-		printQuote.addActionListener(new MenuListener());
 		popupprint.add(printInvoice);
-		popupprint.add(printQuote);
 		print.add(popupprint);
 		
 		print.addMouseListener(new MouseAdapter() {
@@ -242,14 +235,11 @@ public class CompanyGUICustomer extends JFrame {
 				popupprint.setVisible(false);
 				handlePrintInvoice();
 			}
-			else if (source.equals(printQuote)) {
-				popupprint.setVisible(false);
-				handlePrintQuote();
-			}
 		}
 	
 		private void handleEditInformation() {
-			JFrame editinfo = new JFrame();
+			dispose();
+			editinfo = new JFrame();
 			Dimension screenSize1 = Toolkit.getDefaultToolkit().getScreenSize();
 			editinfo.setSize(screenSize1.width, screenSize1.height);
 			editinfo.setLayout(new BorderLayout());
@@ -261,35 +251,82 @@ public class CompanyGUICustomer extends JFrame {
 			final JPopupMenu popupfile1 = new JPopupMenu();
 			final JPopupMenu popupplans1 = new JPopupMenu();
 			final JPopupMenu popupprint1 = new JPopupMenu();
-			JMenu file1 = new JMenu("File");
-			JMenuItem exit1 = new JMenuItem("Exit");
-			JMenuItem signOut1 = new JMenuItem("Sign Out");
-			exit1.addActionListener(new MenuListener());
-			signOut1.addActionListener(new MenuListener());
+			final JMenu file1 = new JMenu("File");
 			file1.setFont(new Font("Dialog", Font.PLAIN, 14));
-			exit1.setFont(new Font("Dialog", Font.PLAIN, 14));
-			signOut1.setFont(new Font("Dialog", Font.PLAIN, 14));
+			popupfile1.add(exit);
+			popupfile1.add(signOut);
 			file1.add(popupfile1);
-			file.addMouseListener(new MouseAdapter() {
+			file1.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
 					if (popupfile1.isVisible()) {
 						popupfile1.setVisible(false);
 					}
 					else {
-						popupfile1.show(file, 47, 0);
+						popupfile1.show(file1, 47, 0);
 						popupplans1.setVisible(false);
 						popupprint1.setVisible(false);
 					}
 				}
 			});
 			
-			JMenu plans1 = new JMenu("Plans");
+			final JMenu plans1 = new JMenu("Plans");
 			plans1.setFont(new Font("Dialog", Font.PLAIN, 14));
-			JMenuItem viewAvailablePlans1 = new JMenuItem("View Available Plans");
-			viewAvailablePlans1.setFont(new Font("Dialog", Font.PLAIN, 14));
-			viewAvailablePlans1.addActionListener(new MenuListener());
-			popupplans1.add(viewAvailablePlans1);
+			popupplans1.add(viewAvailablePlans);
+			plans1.add(popupplans1);
+			plans1.addMouseListener(new MouseAdapter () {
+				public void mouseClicked(MouseEvent e) {
+					if (popupplans1.isVisible()) {
+						popupplans1.setVisible(false);
+					}
+					else {
+						popupplans1.show(plans1, 47, 0);
+						popupfile1.setVisible(false);
+						popupprint1.setVisible(false);
+					}
+				}
+			});
 			
+			final JMenu print1 = new JMenu("Print");
+			print1.setFont(new Font("Dialog", Font.PLAIN, 14));
+			popupprint1.add(printInvoice);
+			print1.add(popupprint1);
+			print1.addMouseListener(new MouseAdapter () {
+				public void mouseClicked(MouseEvent e) {
+					if (popupprint1.isVisible()) {
+						popupprint1.setVisible(false);
+					}
+					else {
+						popupprint1.show(print1, 47, 0);
+						popupfile1.setVisible(false);
+						popupplans1.setVisible(false);
+					}
+				}
+			});
+			menuBar1.setFont(new Font("Dialog", Font.PLAIN, 14));
+			menuBar1.add(file1, 0,0);
+			menuBar1.add(plans1, 0,1);
+			menuBar1.add(print1, 0,2);
+			JPanel northPanel = new JPanel(new GridBagLayout());
+			GridBagConstraints c1 = new GridBagConstraints();
+			c1.weightx = 1.0;
+			c1.weighty = 1.0;
+			c1.gridx = 0;
+			c1.gridy = 0;
+			c1.anchor = GridBagConstraints.FIRST_LINE_START;
+			northPanel.add(menuBar1, c1);
+			northPanel.setBackground(new Color (238, 238, 238));
+			northPanel.setVisible(true);
+			editinfo.add(northPanel, BorderLayout.NORTH);
+			editinfo.setBackground(new Color(246, 243, 243));
+			editinfo.setVisible(true);
+			
+			JPanel customerinfoedit = new JPanel(new GridLayout(0, 2));
+			JPanel customercurrentinfo = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			JTextArea customerinfotext = new JTextArea("Name: " + user.getName() + "\nPassword: " + user.getPswd());
+			customerinfotext.setLineWrap(true);
+			customerinfotext.setWrapStyleWord(true);
+			customerinfotext.setEditable(false);
+			editinfo.add(customerinfoedit, BorderLayout.CENTER);
 		}
 		
 		private void handleViewAvailablePlans() {
@@ -319,27 +356,16 @@ public class CompanyGUICustomer extends JFrame {
 			invoice.pack();
 		}
 		
-		private void handlePrintQuote() {
-			
-		}
-		
-		/*private void handleSave(Company co1) {
-			Company.saveData(co1);
-		}
-		
-		private Company handleLoad() {
-			co = new Company();
-			co = Company.loadData();
-			
-			return co;
-		}*/
-		
 		private void handleSignOut() {
 			dispose();
+			if (editinfo.isVisible()) {
+				editinfo.dispose();
+			}
+			
 			Company.saveData(co);
 			co = new Company();
 			co = Company.loadData();
-			LoginGUI return1 = new LoginGUI("The University of Arizona");
+			LoginGUI return1 = new LoginGUI("The University of Arizona", co);
 		}
 	}
 }
