@@ -20,6 +20,10 @@ import system.people.Customer;
  */
 public class CompanyGUICustomer extends JFrame {
 	private Company co;
+	private final JPopupMenu popupfile;
+	private final JPopupMenu popupedit;
+	private final JPopupMenu popupplans;
+	private final JPopupMenu popupprint;
 	private JPanel panel = new JPanel(new BorderLayout());
 	private JMenuBar menuBar;
 	private JMenu menu;
@@ -51,7 +55,7 @@ public class CompanyGUICustomer extends JFrame {
 			co.people.add(co1.people.get(i));
 		}
 		user = c1;
-		
+		Company.saveData(co);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setSize(screenSize.width, screenSize.height);
 		setLayout(new BorderLayout());
@@ -61,7 +65,7 @@ public class CompanyGUICustomer extends JFrame {
 		
 		menuBar = new VerticalMenuBar();
 		file = new JMenu("File");
-		final JPopupMenu popupfile = new JPopupMenu();
+		popupfile = new JPopupMenu();
 		save = new JMenuItem("Save");
 		load = new JMenuItem("Load");
 		exit = new JMenuItem("Exit");
@@ -81,9 +85,9 @@ public class CompanyGUICustomer extends JFrame {
 		popupfile.add(signOut);
 		popupfile.add(exit);
 		file.add(popupfile);
-		final JPopupMenu popupedit = new JPopupMenu();
-		final JPopupMenu popupplans = new JPopupMenu();
-		final JPopupMenu popupprint = new JPopupMenu();
+		popupedit = new JPopupMenu();
+		popupplans = new JPopupMenu();
+		popupprint = new JPopupMenu();
 		file.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if (popupfile.isVisible()) {
@@ -131,13 +135,14 @@ public class CompanyGUICustomer extends JFrame {
 					popupplans.setVisible(false);
 				}
 				else {
-					popupplans.show(edit, 47, 25);
+					popupplans.show(plans, 47, 0);
 					popupfile.setVisible(false);
 					popupedit.setVisible(false);
 					popupprint.setVisible(false);
 				}
 			}
 		});
+		
 		print = new JMenu("Print");
 		print.setFont(new Font("Dialog", Font.PLAIN, 14));
 		printInvoice = new JMenuItem("Print Invoice");
@@ -149,13 +154,14 @@ public class CompanyGUICustomer extends JFrame {
 		popupprint.add(printInvoice);
 		popupprint.add(printQuote);
 		print.add(popupprint);
+		
 		print.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if (popupprint.isVisible()) {
 					popupprint.setVisible(false);
 				}
 				else {
-					popupprint.show(edit, 47, 49);
+					popupprint.show(print, 47, 0);
 					popupfile.setVisible(false);
 					popupedit.setVisible(false);
 					popupplans.setVisible(false);
@@ -223,29 +229,39 @@ public class CompanyGUICustomer extends JFrame {
 			JMenuItem source = (JMenuItem)(e.getSource());
 			
 			if (source.equals(save)) {
+				popupfile.setVisible(false);
 				handleSave(co);
 			}
 			else if (source.equals(load)) {
+				popupfile.setVisible(false);
 				handleLoad();
 			}
 			else if (source.equals(exit)) {
+				popupfile.setVisible(false);
 				Company.saveData(co);
+				co = handleLoad();
 				System.exit(0);
 			}
 			else if (source.equals(signOut)) {
+				popupfile.setVisible(false);
 				Company.saveData(co);
+				co = handleLoad();
 				handleSignOut();
 			}
 			else if (source.equals(editInformation)) {
+				popupedit.setVisible(false);
 				handleEditInformation();
 			}
 			else if (source.equals(viewAvailablePlans)) {
+				popupplans.setVisible(false);
 				handleViewAvailablePlans();
 			}
 			else if (source.equals(printInvoice)) {
+				popupprint.setVisible(false);
 				handlePrintInvoice();
 			}
 			else if (source.equals(printQuote)) {
+				popupprint.setVisible(false);
 				handlePrintQuote();
 			}
 		}
@@ -259,22 +275,25 @@ public class CompanyGUICustomer extends JFrame {
 		}
 		
 		private void handlePrintInvoice() {
+			JFrame invoice = new JFrame();
 			Invoice i1 = new Invoice();
 			i1.setPerson(user);
 			i1.setDueDate(user.getDueDate());
 			i1.setMinDue(user.getPrice());
 			i1.setTotalDue(user.getAmyDue());
 			i1.generateInvoice();
+			invoice.setVisible(true);
+			invoice.setSize(600, 600);
+			invoice.setTitle(i1.getPerson().getName() + "'s Invoice");
+			invoice.setLayout(new FlowLayout(FlowLayout.CENTER));
+			invoice.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			JTextArea invoiceinfo = new JTextArea("Customer name: " + i1.getPerson().getName() + "\n\n" + "Amount due this cycle: $" + i1.getMinDue() + "\n\nTotal amount due for contract: $" + i1.getTotalDue() + "\n\nPayment due by: " + i1.getDueDate().getDate());
-			JScrollPane invoicepane = new JScrollPane(invoiceinfo);
-			invoicepane.setPreferredSize(new Dimension(600, 600));
 			invoiceinfo.setLineWrap(true);
-			invoiceinfo.setWrapStyleWord(true);
-			invoiceinfo.setEditable(false);
-			invoiceinfo.setEditable(false);
-			invoicepane.setVisible(true);
+			JScrollPane invoicepane = new JScrollPane(invoiceinfo);
 			invoicepane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-			JOptionPane.showMessageDialog(null, invoicepane, user.getName() + "'s Invoice", JOptionPane.PLAIN_MESSAGE);
+			invoicepane.setPreferredSize(new Dimension(600, 600));
+			invoice.add(invoicepane);
+			invoice.pack();
 		}
 		
 		private void handlePrintQuote() {

@@ -41,7 +41,7 @@ public class Customer extends Person{
 		speedUp = 0;
 		speedDown = 0;
 		price = 0.0;
-		amtDue = 0.0;
+		amtDue = 0.00;
 		dueDate.setMonth(1);
 		dueDate.setDay(1);
 		dueDate.setYear(2017);
