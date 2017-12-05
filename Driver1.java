@@ -1,5 +1,7 @@
 package system.software;
 
+import java.util.ArrayList;
+
 import system.company.Company;
 import system.forms.*;
 import system.hardware.*;
@@ -20,7 +22,12 @@ public class Driver1 {
 		Inventory i1 = new Inventory();
 		Company co = new Company();
 		Customer c1 = new Customer();
-		
+		Radio r1 = new Radio();
+		r1.setMaxDataRate(160);
+		r1.setSetDataRate(140);
+		r1.setAP(true);
+		Antenna a1 = new Antenna();
+		r1.addConn(r1);
 		c1.setName("Kaitlyn Oura");
 		c1.setUserID(8);
 		c1.setPswd("hello");
@@ -28,6 +35,9 @@ public class Driver1 {
 		c1.setDown(18);
 		c1.setPrice(18.98);
 		c1.setAddress("1234 ABC Lane, Phoenix, AZ 85087");
+		ArrayList<Equipment> e = new ArrayList<Equipment>();
+		e.add(r1);
+		c1.setEquip(e);
 		p1.setName("Kara Danvers");
 		p1.setUserID(01);
 		p2.setName("Lena Luthor");

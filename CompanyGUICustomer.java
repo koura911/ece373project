@@ -5,12 +5,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 
 import system.company.Company;
 import system.forms.Invoice;
+import system.forms.Quote;
+import system.hardware.Radio;
 import system.people.Customer;
 
 /*
@@ -37,6 +40,8 @@ public class CompanyGUICustomer extends JFrame {
 	private JMenuItem viewAvailablePlans;
 	private JMenuItem printInvoice;
 	private JMenuItem signOut;
+	private JFrame availableplans = new JFrame();
+	
 	private ImageIcon img = new ImageIcon("C:/Users/Oura9_000/Desktop/ECE_373_Project_Git/ece373project/icon.jpg");
 	
 	public CompanyGUICustomer(String string, Company co1, Customer c1) {
@@ -278,7 +283,61 @@ public class CompanyGUICustomer extends JFrame {
 		private void handleViewAvailablePlans() {
 			//use checkSpeedUp checkSpeedDown and use that show available plans
 			//+$10 per 5mbps increase in plans
+			//dispose();
+			int radioindex = 0;
+			Radio userr1 = new Radio();
+			for (int i = 0; i < user.getEquip().size(); i++) {
+				if (user.getEquip().get(i) instanceof Radio) {
+					radioindex = i;
+					userr1 = (Radio) user.getEquip().get(radioindex);
+					break;
+				}
+			}
 			
+			
+			double planincrement = Math.floor(userr1.getConnections().get(0).calcAvailData() / 5);
+			int planincrment = (int) planincrement;
+			if (planincrment == 0) {
+				JOptionPane.showMessageDialog(null, "Already have best available plan.", "View Available Plans", JOptionPane.CLOSED_OPTION);
+			}
+			else {
+				String info = new String("");
+				ArrayList<Quote> newQuotes = new ArrayList<Quote>();
+
+				for (int i = 1; i <= planincrment; i++) {
+					info = info + "Plan " + i + ":\n\tSpeed Up: " + (user.getUp() + 5 * i) + "\n\tSpeed down: " + (user.getDown() + 5 * i) + "\n\tPrice: $" + (user.getPrice() + 10 * i) + "\n";
+					
+					newQuotes.add(new Quote(user.getUp() + 5 * i, user.getDown() + 5 * i, user.getPrice() + 10 * i));
+				}
+				info = info + "\nPrint Quote #: ";
+				
+				String[] choices = new String[planincrment];
+				for (int i = 1; i <= planincrment; i++) {
+					choices[i - 1] = Integer.toString(i);
+				}
+				
+				String input = (String)JOptionPane.showInputDialog(null, info, "View Available Plans", JOptionPane.OK_OPTION, null, choices, choices[0]);
+			
+				for (int i = 0; i <= planincrment; i++) {
+					if (input.equals(choices[i])) {
+						newQuotes.get(i).generateQuote();
+						JFrame quote = new JFrame();
+						quote.setVisible(true);
+						quote.setSize(600, 600);
+						quote.setTitle("Quote");
+						quote.setLayout(new FlowLayout(FlowLayout.CENTER));
+						quote.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						JTextArea quoteinfo = new JTextArea("Available Speed Up: " + newQuotes.get(i).getAvailableSpeedUp() + " Mbps\nAvailable Speed Down: " + newQuotes.get(i).getAvailableSpeedDown() + " Mbps\nPrice: $" + newQuotes.get(i).getPrice() + " per month");
+						quoteinfo.setLineWrap(true);
+						JScrollPane quotepane = new JScrollPane(quoteinfo);
+						quotepane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+						quotepane.setPreferredSize(new Dimension(600, 600));
+						quote.add(quotepane);
+						quote.pack();
+						break;
+					}
+				}
+			}
 		}
 		
 		

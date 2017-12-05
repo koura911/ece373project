@@ -21,6 +21,12 @@ public class Quote extends Form {
 		price = 0.0;
 	}
 	
+	public Quote(int su, int sd, double sp) {
+		super();
+		availableSpeedUp = su;
+		availableSpeedDown = sd;
+		price = sp;
+	}
 	public int getAvailableSpeedUp() {
 		return this.availableSpeedUp;
 	}
