@@ -1,4 +1,5 @@
 package system.software;
+
 import system.company.*;
 import system.people.*;
 
@@ -11,11 +12,21 @@ public class DriverGUI {
 		Company c = new Company();
 		
 		Customer cust = new Customer();
+		Admin adi = new Admin();
 		 
-		c.addPeople(cust);
+		
 		cust.setName("Sam");
 		cust.setPswd("password");
-		System.out.print(cust.getUserID());
+		cust.setUserID(2);
+		System.out.println(cust.getUserID());
+		
+		adi.setName("Josue");
+		adi.setPswd("password");
+		adi.setUserID(1);
+		System.out.println(adi.getUserID());
+		
+		c.addPeople(cust);
+		c.addPeople(adi);
 		
 		//Admin admin = new Admin();
 		LoginGUI loginGui = new LoginGUI("Login GUI",c);    
