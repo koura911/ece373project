@@ -25,7 +25,7 @@ import company.people.Person;
 
 
 
-public class employee_gui extends JFrame {
+public class EmployeeGUI extends JFrame {
 	
 	private Company comp;
 	private JMenuBar menubar;
@@ -53,7 +53,7 @@ public class employee_gui extends JFrame {
 	private JMenuItem reports;
 	private JMenuItem forms;
 	
-	public employee_gui(String EmployeeGui, Company c1) {
+	public EmployeeGUI(String EmployeeGui, Company c1) {
 		
 		super(EmployeeGui);
 		setSize(800,600);
@@ -183,6 +183,9 @@ public class employee_gui extends JFrame {
 			else if(source.equals(addUser)) {
 				handleAddUser();
 			}
+			else if (source.equals(reports)) {
+				handlePrintReport();
+			}
 		}
 	}
 	public void handleLoad() {
@@ -197,6 +200,11 @@ public class employee_gui extends JFrame {
 			JOptionPane.showMessageDialog(null,"No Company","Error",JOptionPane.PLAIN_MESSAGE);
 		
 	}
+	
+	public void handlePrintReport() {
+		
+	}
+	
 	public Person addNewUser() {
 		JPanel newUser = new JPanel();
 		addCust.add(new JLabel("Enter the User's Information"));
@@ -232,7 +240,7 @@ public class employee_gui extends JFrame {
 	public Customer addCustomer() {
 		Customer c1 = new Customer();
 		JPanel addCust = new JPanel();
-		addCust.add(new JLabel("Enter the Customer's Information"))
+		addCust.add(new JLabel("Enter the Customer's Information"));
 		
 		JTextField xcor = new JTextField(5);
 		JTextField ycor = new JTextField(5);
@@ -289,22 +297,22 @@ public class employee_gui extends JFrame {
 		}
 		else if(of.isSelected()) {
 			Person p = addNewUser();
-			OfficeWorker of = new OfficeWorker();
-			of.setName(p.getName());
-			of.setPswd(p.getPswd());
+			OfficeWorker of1 = new OfficeWorker();
+			of1.setName(p.getName());
+			of1.setPswd(p.getPswd());
 		}
 		else if(te.isSelected()) {
 			Person p = addNewUser();
-			Tech te = new Tech();
-			te.setName(p.getName());
-			te.setPswd(p.getPswd());
+			Tech te1 = new Tech();
+			te1.setName(p.getName());
+			te1.setPswd(p.getPswd());
 			
 		}
 		else if(ad.isSelected()) {
 			Person p = addNewUser();
-			Admin ad = new Admin();
-			ad.setName(p.getName());
-			ad.setPswd(p.getPswd());
+			Admin ad1 = new Admin();
+			ad1.setName(p.getName());
+			ad1.setPswd(p.getPswd());
 		}
 		
 	}
