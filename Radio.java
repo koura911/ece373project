@@ -134,7 +134,7 @@ public class Radio extends Equipment {
     	
     	for(Radio r:connections)
     		avail = avail -r.getSetDataRate();
-    	return avail;
+    	return avail/2;
     }
 
 
