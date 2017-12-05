@@ -1,5 +1,7 @@
 package system.software;
 import system.company.*;
+import system.forms.Inventory;
+import system.forms.Roster;
 import system.people.*;
 
 import java.util.ArrayList;
@@ -7,6 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -16,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import company.people.Customer;
@@ -202,7 +206,31 @@ public class EmployeeGUI extends JFrame {
 	}
 	
 	public void handlePrintReport() {
+		Roster ro1 = new Roster();
+		ro1.setEquipment(comp.equipmentList);
+		ro1.setPeople(comp.people);
+		Inventory i1 = new Inventory();
+		i1.setEquipment(comp.equipmentList);
+		String reportNum = JOptionPane.showInputDialog(null, "Enter report number: ");
+		int rnum = Integer.parseInt(reportNum);
+		ro1.setNumber(rnum);
+		i1.setNumber(rnum);
+		JTextArea rostertext = new JTextArea();
+		String rosterstring = "";
 		
+		for (int i = 0; i < ro1.getPeople().size(); i++) {
+			rosterstring = rosterstring + ro1.getPeople().get(i).getName() + "\n";
+		}
+		
+		rostertext.setText(rosterstring);
+		JTextArea inventorytext = new JTextArea();
+		String inventorystring = "";
+		
+		for (int i = 0; i < i1.getEquipment().size(); i++) {
+			inventorystring = inventorystring + "Name: " + i1.getEquipment().get(i).getName() + "\nBrand: " + i1.getEquipment().get(i).getBrand() + "\nModel: " + i1.getEquipment().get(i).getModel() + "\nIDNum: " + i1.getEquipment().get(i).getIdNum() + "\nSerial Number: " + i1.getEquipment().get(i).getSerialNumber() + "\nDate Installed: " + i1.getEquipment().get(i).getDateInstalled().getDate() + "\nLocation: " + i1.getEquipment().get(i).getLocation().getAddress() + " " + i1.getEquipment().get(i).getLocation().getGpsLat() + " " + i1.getEquipment().get(i).getLocation().getGpsLon() + "\n";
+		}
+		
+		inventorytext.setText(inventorystring);
 	}
 	
 	public Person addNewUser() {
