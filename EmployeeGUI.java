@@ -81,25 +81,6 @@ public class employee_gui extends JFrame {
 		
 		menubar.add(file);
 		
-			
-		
-		/*
-		 * //admin menu
-	private JMenuItem addUser;
-	private JMenuItem editUser;
-	private JMenuItem rmvUser;
-	private JMenuItem addEquip; //same on tech menu
-	private JMenuItem editEquip; //same on tech menu
-	private JMenuItem rmvEquip;
-	
-	//tech menu
-	private JMenuItem addCust; // same on office menu
-	
-	//office menu
-	private JMenuItem reports;
-	private JMenuItem forms;
-		 * */
-		
 	}
 	
 	public void buildAdminGUI() {
@@ -199,6 +180,9 @@ public class employee_gui extends JFrame {
 			else if(source.equals(load)) {
 				handleLoad();
 			}
+			else if(source.equals(addUser)) {
+				handleAddUser();
+			}
 		}
 	}
 	public void handleLoad() {
@@ -276,11 +260,7 @@ public class employee_gui extends JFrame {
 		c1.setUp(Integer.parseInt(sUp.getText()));
 		c1.getLoc().setGpsLon(Double.parseDouble(ycor.getText()));
 		c1.getLoc().setGpsLat(Double.parseDouble(xcor.getText()));
-		
-		
-		
-		
-		
+			
 	}
 	
 	public void handleAddUser() {
@@ -299,7 +279,6 @@ public class employee_gui extends JFrame {
 		addUser.add(cu);
 		addUser.add(of);
 		addUser.add(te);
-		addUser.add(of);
 		addUser.add(ad);
 		
 		if(cu.isSelected()) {
@@ -308,6 +287,27 @@ public class employee_gui extends JFrame {
 			c.setName(p.getName());
 			c.setPswd(p.getPswd());
 		}
+		else if(of.isSelected()) {
+			Person p = addNewUser();
+			OfficeWorker of = new OfficeWorker();
+			of.setName(p.getName());
+			of.setPswd(p.getPswd());
+		}
+		else if(te.isSelected()) {
+			Person p = addNewUser();
+			Tech te = new Tech();
+			te.setName(p.getName());
+			te.setPswd(p.getPswd());
+			
+		}
+		else if(ad.isSelected()) {
+			Person p = addNewUser();
+			Admin ad = new Admin();
+			ad.setName(p.getName());
+			ad.setPswd(p.getPswd());
+		}
+		
 	}
 
 }
+
