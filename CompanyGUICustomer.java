@@ -174,7 +174,7 @@ public class CompanyGUICustomer extends JFrame {
 		setBackground(new Color(246, 243, 243));
 		JPanel nestedCenter = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		nestedCenter.setBackground(ccc1);
-		JTextArea textArea = new JTextArea("Welcome to " + string + ". Select an action from the menu bar.\n\n\n\nCustomer name:  " + user.getName() + "\n\nCurrent Plan:\n\tSpeed up:\t" + user.getUp() + " Mbps\n\tSpeed down:\t" + user.getDown() + " Mbps\n\nPrice:\t" + "$" + user.getPrice() +" per month\n\nEquipment:\n");
+		JTextArea textArea = new JTextArea("Welcome to " + string + ". Select an action from the menu bar.\n\n\n\nCustomer name:  " + user.getName() + "\nAddress: " + user.getAddress() + "\n\nCurrent Plan:\n\tSpeed up:\t" + user.getUp() + " Mbps\n\tSpeed down:\t" + user.getDown() + " Mbps\n\nPrice:\t" + "$" + user.getPrice() +" per month\n\nEquipment:\n");
 		JScrollPane scrollPaneEquipment = new JScrollPane(textArea);
 		textArea.setFont(new Font("Dialog", Font.PLAIN, 16));
 
@@ -214,10 +214,18 @@ public class CompanyGUICustomer extends JFrame {
 			JMenuItem source = (JMenuItem)(e.getSource());
 
 			if (source.equals(exit)) {
-				popupfile.setVisible(false);
-				Company.saveData(co);
-				co = Company.loadData();
-				System.exit(0);
+				if (isVisible()) {
+					popupfile.setVisible(false);
+					Company.saveData(co);
+					co = Company.loadData();
+					System.exit(0);
+				}
+				else if (editinfo.isVisible()) {
+					editinfo.dispose();
+					Company.saveData(co);
+					co = Company.loadData();
+					setVisible(true);
+				}
 			}
 			else if (source.equals(signOut)) {
 				popupfile.setVisible(false);
@@ -239,107 +247,38 @@ public class CompanyGUICustomer extends JFrame {
 	
 		private void handleEditInformation() {
 			dispose();
-			editinfo = new JFrame();
-			Dimension screenSize1 = Toolkit.getDefaultToolkit().getScreenSize();
-			editinfo.setSize(screenSize1.width, screenSize1.height);
-			editinfo.setLayout(new BorderLayout());
-			editinfo.setIconImage(img.getImage());
-			editinfo.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			setResizable(false);
+			JTextField name = new JTextField();
+			JTextField address = new JTextField();
+			JTextField password = new JTextField();
+			Object[] fields = {
+					"Name: ", name,
+					"Address: ", address,
+					"Password: ", password
+			};
 			
-			JMenuBar menuBar1 = new VerticalMenuBar();
-			final JPopupMenu popupfile1 = new JPopupMenu();
-			final JPopupMenu popupplans1 = new JPopupMenu();
-			final JPopupMenu popupprint1 = new JPopupMenu();
-			final JMenu file1 = new JMenu("File");
-			file1.setFont(new Font("Dialog", Font.PLAIN, 14));
-			popupfile1.add(exit);
-			popupfile1.add(signOut);
-			file1.add(popupfile1);
-			file1.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {
-					if (popupfile1.isVisible()) {
-						popupfile1.setVisible(false);
-					}
-					else {
-						popupfile1.show(file1, 47, 0);
-						popupplans1.setVisible(false);
-						popupprint1.setVisible(false);
-					}
-				}
-			});
 			
-			final JMenu plans1 = new JMenu("Plans");
-			plans1.setFont(new Font("Dialog", Font.PLAIN, 14));
-			popupplans1.add(viewAvailablePlans);
-			plans1.add(popupplans1);
-			plans1.addMouseListener(new MouseAdapter () {
-				public void mouseClicked(MouseEvent e) {
-					if (popupplans1.isVisible()) {
-						popupplans1.setVisible(false);
-					}
-					else {
-						popupplans1.show(plans1, 47, 0);
-						popupfile1.setVisible(false);
-						popupprint1.setVisible(false);
-					}
-				}
-			});
+			name.setText(user.getName());
+			address.setText(user.getAddress());
+			password.setText(user.getPswd());
+			int option = JOptionPane.showConfirmDialog(null, fields, "Edit information", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+			if (option == JOptionPane.OK_OPTION) {
+				user.setName(name.getText());
+				user.setAddress(address.getText());
+				user.setPswd(password.getText());
+				Company.saveData(co);
+				co = Company.loadData();
+				CompanyGUICustomer updated = new CompanyGUICustomer("The University of Arizona", co, user);
+			}
+			else {
+				setVisible(true);
+			}
 			
-			final JMenu print1 = new JMenu("Print");
-			print1.setFont(new Font("Dialog", Font.PLAIN, 14));
-			popupprint1.add(printInvoice);
-			print1.add(popupprint1);
-			print1.addMouseListener(new MouseAdapter () {
-				public void mouseClicked(MouseEvent e) {
-					if (popupprint1.isVisible()) {
-						popupprint1.setVisible(false);
-					}
-					else {
-						popupprint1.show(print1, 47, 0);
-						popupfile1.setVisible(false);
-						popupplans1.setVisible(false);
-					}
-				}
-			});
-			menuBar1.setFont(new Font("Dialog", Font.PLAIN, 14));
-			menuBar1.add(file1, 0,0);
-			menuBar1.add(plans1, 0,1);
-			menuBar1.add(print1, 0,2);
-			JPanel northPanel = new JPanel(new GridBagLayout());
-			GridBagConstraints c1 = new GridBagConstraints();
-			c1.weightx = 1.0;
-			c1.weighty = 1.0;
-			c1.gridx = 0;
-			c1.gridy = 0;
-			c1.anchor = GridBagConstraints.FIRST_LINE_START;
-			northPanel.add(menuBar1, c1);
-			northPanel.setBackground(new Color (238, 238, 238));
-			northPanel.setVisible(true);
-			editinfo.add(northPanel, BorderLayout.NORTH);
-			editinfo.setBackground(new Color(246, 243, 243));
-			editinfo.setVisible(true);
-			
-			JPanel customerinfoedit = new JPanel(new GridLayout(0, 2));
-			JPanel customercurrentinfo = new JPanel(new FlowLayout(FlowLayout.LEFT));
-			JTextArea customerinfotext = new JTextArea("\tName: " + user.getName() + "\n\tPassword: " + user.getPswd());
-			customerinfotext.setBackground(new Color(238, 238, 238));
-			customerinfotext.setFont(new Font("Dialog", Font.PLAIN, 14));
-			customerinfotext.setSize(new Dimension(600, 600));
-			customerinfotext.setLineWrap(true);
-			customerinfotext.setWrapStyleWord(true);
-			customerinfotext.setEditable(false);
-			customercurrentinfo.add(customerinfotext);
-			customerinfoedit.add(customercurrentinfo, 0,0);
-			JPanel customerinfonew = new JPanel();
-			customerinfonew.add(customerinfotext);
-			customerinfoedit.add(customerinfonew, 0,1);
-			editinfo.add(customerinfoedit, BorderLayout.CENTER);
 		}
 		
 		private void handleViewAvailablePlans() {
 			//use checkSpeedUp checkSpeedDown and use that show available plans
 			//+$10 per 5mbps increase in plans
+			
 		}
 		
 		

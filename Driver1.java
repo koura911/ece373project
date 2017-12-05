@@ -27,7 +27,7 @@ public class Driver1 {
 		c1.setUp(6);
 		c1.setDown(18);
 		c1.setPrice(18.98);
-		
+		c1.setAddress("1234 ABC Lane, Phoenix, AZ 85087");
 		p1.setName("Kara Danvers");
 		p1.setUserID(01);
 		p2.setName("Lena Luthor");
