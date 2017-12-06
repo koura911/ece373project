@@ -53,7 +53,7 @@ public class EmployeeGUI extends JFrame {
 	public EmployeeGUI(String EmployeeGui, Company c1) {
 		
 		super(EmployeeGui);
-		setSize(800,600);
+		setSize(new Dimension(800,600));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		buildBaseGUI();	
 		setVisible(true);
@@ -121,6 +121,7 @@ public class EmployeeGUI extends JFrame {
 		menubar.add(admin);
 		menubar.add(tech);
 		menubar.add(office);
+
 	}
 	public void buildTechGUI() {
 		//tech

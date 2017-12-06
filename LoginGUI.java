@@ -152,18 +152,22 @@ public class LoginGUI extends JFrame {
 						//If the password is correct
 						if(user instanceof Customer) {
 							//CompanyGUICustomer(String string, Company co1, Customer comp)
+							dispose();
 							CompanyGUICustomer return0 = new CompanyGUICustomer("Customer",comp,(Customer)user);
 						}
 						/*else if(user instanceof Employee) {
 							buildBaseGUI();
 							}*/
 						else if(user instanceof Admin) {
+							frame.dispose();
 							buildBaseGUI();
 							buildAdminGUI();
 						}else if(user instanceof OfficeWorker) {
+							frame.dispose();
 							buildBaseGUI();
 							buildOfficeGUI();
 						}else if(user instanceof Tech) {
+							frame.dispose();
 							buildBaseGUI();
 							buildTechGUI();
 						}
