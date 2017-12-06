@@ -1,5 +1,7 @@
 package system.software;
 import system.company.*;
+import system.hardware.Equipment;
+import system.information.Location;
 import system.people.*;
 import system.software.*;
 
@@ -36,7 +38,7 @@ public class LoginGUI extends JFrame {
 	//file menu
 	private JMenuItem save;
 	private JMenuItem load;
-	private JMenuItem signOut;
+	
 	//admin menu
 	private JMenuItem addUser;
 	private JMenuItem editUser;
@@ -152,31 +154,28 @@ public class LoginGUI extends JFrame {
 						//If the password is correct
 						if(user instanceof Customer) {
 							//CompanyGUICustomer(String string, Company co1, Customer comp)
-							frame.dispose();
 							CompanyGUICustomer return0 = new CompanyGUICustomer("Customer",comp,(Customer)user);
 						}
 						/*else if(user instanceof Employee) {
 							buildBaseGUI();
 							}*/
 						else if(user instanceof Admin) {
-							frame.dispose();
 							buildBaseGUI();
 							buildAdminGUI();
 						}else if(user instanceof OfficeWorker) {
-							frame.dispose();
 							buildBaseGUI();
 							buildOfficeGUI();
 						}else if(user instanceof Tech) {
-							frame.dispose();
 							buildBaseGUI();
 							buildTechGUI();
 						}
 					}else {
 						//if the password is wrong
 						JOptionPane.showMessageDialog(null, 
-								"Password was incorrect", 
+								"Password was incorecct", 
 								"Please try again", 
 								JOptionPane.PLAIN_MESSAGE);
+						LoginGUI return6 = new LoginGUI("Login", comp);
 					}
 					
 					
@@ -220,13 +219,13 @@ public class LoginGUI extends JFrame {
 		
 		save = new JMenuItem("Save");
 		load = new JMenuItem("Load");
-		signOut = new JMenuItem("Sign Out");
+		
 		save.addActionListener(new MenuListener());
 		load.addActionListener(new MenuListener());
-		signOut.addActionListener(new MenuListener());
+		
 		file.add(save);
 		file.add(load);
-		file.add(signOut);
+		
 		menubar.add(file);
 		frame.add(menubar);
 		
@@ -292,6 +291,10 @@ public class LoginGUI extends JFrame {
 	
 	public void buildTechGUI() {
 		frame = new JFrame();
+		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setSize(screenSize.width, screenSize.height);
+		setResizable(false);
 
 		//tech
 		tech = new JMenu("Tech");
@@ -323,6 +326,10 @@ public class LoginGUI extends JFrame {
 	
 	public void buildOfficeGUI() {
 		frame = new JFrame();
+		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setSize(screenSize.width, screenSize.height);
+		setResizable(false);
 		
 		//office
 		office = new JMenu("Office Worker");
@@ -358,49 +365,22 @@ public class LoginGUI extends JFrame {
 			else if(source.equals(addUser)) {
 				handleAddUser();
 			}
-			else if (source.equals(signOut)) {
-				handleSignOut();
+			else if(source.equals(editUser)) {
+				handleEditUser();
 			}
-			else if (source.equals(editEquip)) {
-				handleEditEquip();
+			else if(source.equals(rmvUser)) {
+				handleRmvUser();
 			}
-		}
-	}
-	
-	public void handleEditEquip() {		
-		String option = JOptionPane.showInputDialog(null, "Enter equipment's serial number: ", "Edit Equipment", JOptionPane.PLAIN_MESSAGE);		
-		if (option != "") {
-			boolean anE = false;
-			int posNum = 0;
-			for (int i = 0; i < comp.equipmentList.size(); i++) {
-				if (option.equals(comp.equipmentList.get(i).getSerialNumber())) {
-					posNum = i;
-					anE = true;
-					break;
-				}
+			else if(source.equals(rmvEquip)) {
+				handleRmvEquip();
 			}
-			
-			if (anE == true) {
-				JTextField name = new JTextField();
-				JTextField dateInstalledDay = new JTextField();
-				JTextField dateInstalledMonth = new JTextField();
-				JTextField dateInstalledYear = new JTextField();
-				JTextField addrLoc = new JTextField();
-				JTextField locLat = new JTextField();
-				JTextField locLong = new JTextField();
+			else if(source.equals(addCust)) {
+				Person p = addNewUser();
+				Customer c = addCustomer();
+				c.setName(p.getName());
+				c.setPswd(p.getPswd());
 				
-				Object[] fields = {
-						"Name: ", name,
-						"Date Installed Day: ", dateInstalledDay,
-						"Date Inststalled Month: ", dateInstalledMonth,
-						"Date Installed Year: ", dateInstalledYear,
-						"Location Address: ", addrLoc,
-						"Location Lat: ", locLat,
-						"Location Long: ", locLong
-				};
-				
-				int option1 = JOptionPane.showConfirmDialog(null, fields, "Edit Equipment", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-				
+<<<<<<< HEAD
 				if (option1 == JOptionPane.OK_OPTION) {
 					if (name.getText() != "") {
 					comp.equipmentList.get(posNum).setName(name.getText());
@@ -426,15 +406,10 @@ public class LoginGUI extends JFrame {
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "Not a valid serial number. Equipment not found.", "Edit Equipment Error", JOptionPane.PLAIN_MESSAGE, null);
+=======
+>>>>>>> b2cd2473ad9ac4bf6f042e4e190340489cc0a652
 			}
 		}
-	}
-	
-	public void handleSignOut() {
-		Company.saveData(comp);
-		comp = Company.loadData();
-		frame.dispose();
-		LoginGUI signedOut = new LoginGUI("WISP", comp);
 	}
 	
 	public void handleLoad() {
@@ -477,39 +452,109 @@ public class LoginGUI extends JFrame {
 				Customer c = addCustomer();
 				c.setName(p.getName());
 				c.setPswd(p.getPswd());
-				comp.addPeople(c);
 			}
 			else if(of.isSelected() && p!=null) {
 				OfficeWorker off = new OfficeWorker();
 				off.setName(p.getName());
 				off.setPswd(p.getPswd());
-				comp.addPeople(off);
 			}
 			else if(te.isSelected() && p!=null) {
 				Tech tec = new Tech();
 				tec.setName(p.getName());
 				tec.setPswd(p.getPswd());
-				comp.addPeople(tec);
+				
 			}
 			else if(ad.isSelected() && p!=null) {
 				Admin adi = new Admin();
 				adi.setName(p.getName());
 				adi.setPswd(p.getPswd());
-				comp.addPeople(adi);
 			}
 			
-			Company.saveData(comp);
-			comp = Company.loadData();
 		}
 	}
 
 	public void handleEditUser() {
 		JPanel editUser = new JPanel();
-		editUser.add(new JLabel("Enter the User ID"));
+		editUser.add(new JLabel("Enter the User ID of the user to be edited"));
+		JTextField userID = new JTextField(5);
+		
+		editUser.add(new JLabel("User ID:") );
+		editUser.add(userID);
+		
+		int result = JOptionPane.showConfirmDialog(null, editUser, "Edit User", JOptionPane.OK_CANCEL_OPTION);
+		
+		if(result == JOptionPane.OK_OPTION) {
+			for(Person p:comp.people)
+				if(Integer.parseInt(userID.getText()) == p.getUserID() && p instanceof Customer ) {
+					 p = addNewUser();
+					 p.setUserID(Integer.parseInt(userID.getText()));
+					 Customer c = addCustomer();
+					 ((Customer) p ).setAddress(c.getAddress());
+					 ((Customer) p ).setDown(c.getDown());
+					 ((Customer) p ).setUp(c.getUp());
+					 Location l = new Location();
+					 l.setGpsLat(c.getLoc().getGpsLat());
+					 l.setGpsLon(c.getLoc().getGpsLon());
+					 ((Customer) p ).setLoc(l);
+				}
+				else {
+					p = addNewUser();
+					p.setUserID(Integer.parseInt(userID.getText()));
+				}
+		}
+	}
+
+	public void handleRmvUser() {
+		JPanel rmvUser = new JPanel();
+		rmvUser.add(new JLabel("Enter the User ID of the user to be removed"));
+		JTextField userID = new JTextField(5);
+		
+		rmvUser.add(new JLabel("User ID:") );
+		rmvUser.add(userID);
+		
+		int result = JOptionPane.showConfirmDialog(null, rmvUser, "Remove User", JOptionPane.OK_CANCEL_OPTION);
+		
+		if(result == JOptionPane.OK_OPTION) {
+			int i = 0;
+			for(Person p:comp.people) {
+				
+				if(Integer.parseInt(userID.getText()) == p.getUserID()) {
+					comp.people.remove(i);
+					return;
+				}
+				i++;
+			}
+			JOptionPane.showMessageDialog(null, "User ID number "+userID.getText()+" does not exist", "User Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
-	public Person addNewUser() {
+	public void handleRmvEquip() {
+		JPanel rmvEquip = new JPanel();
+		rmvEquip.add(new JLabel("Enter the Equipment ID of the device to be removed"));
+		JTextField equipID = new JTextField(5);
+		
+		rmvEquip.add(new JLabel("Device ID:") );
+		rmvEquip.add(equipID);
+		
+		int result = JOptionPane.showConfirmDialog(null, rmvEquip, "Remove Equipment", JOptionPane.OK_CANCEL_OPTION);
+		
+		if(result == JOptionPane.OK_OPTION) {
+			int i = 0;
+			for(Equipment e:comp.equipmentList) {
+				
+				if(Integer.parseInt(equipID.getText()) == e.getIdNum()) {
+					comp.equipmentList.remove(i);
+					return;
+				}
+				i++;
+			}
+			JOptionPane.showMessageDialog(null, "Equipment ID number "+equipID.getText()+" does not exist", "Equipment Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+ 	public Person addNewUser() {
 		JPanel newUser = new JPanel();
+		addCust.add(new JLabel("Enter the User's Information"));
 		
 		JTextField newName = new JTextField(5);
 		JPasswordField newPswd1 = new JPasswordField(5);
@@ -522,7 +567,7 @@ public class LoginGUI extends JFrame {
 		newUser.add(new JLabel("Confirm Password:"));
 		newUser.add(newPswd2);
 		newUser.setVisible(true);
-		int result = JOptionPane.showConfirmDialog(null,newUser,"Add New User", JOptionPane.OK_CANCEL_OPTION);
+		int result = JOptionPane.showConfirmDialog(null,newUser,"User Info", JOptionPane.OK_CANCEL_OPTION);
 		
 		Person p = new Person();
 		
@@ -530,6 +575,7 @@ public class LoginGUI extends JFrame {
 			if(newPswd1.getText().equals(newPswd2.getText())) {
 				p.setName(newName.getText());
 				p.setPswd(newPswd1.getText());
+				p.setUserID(comp.people.size());
 				return p;
 			}
 			else {
@@ -566,7 +612,7 @@ public class LoginGUI extends JFrame {
 		addCust.add(new JLabel("Address:"));
 		addCust.add(Address);
 		
-		JOptionPane.showConfirmDialog(null, addCust, "Add Customer", JOptionPane.OK_CANCEL_OPTION);
+		JOptionPane.showConfirmDialog(null, addCust, "Customer Info", JOptionPane.OK_CANCEL_OPTION);
 		
 		c1.setAddress(Address.getText());
 		c1.setPrice(Double.parseDouble(price.getText()));
