@@ -38,7 +38,7 @@ public class LoginGUI extends JFrame {
 	//file menu
 	private JMenuItem save;
 	private JMenuItem load;
-	
+	private JMenuItem signOut;
 	//admin menu
 	private JMenuItem addUser;
 	private JMenuItem editUser;
@@ -154,28 +154,32 @@ public class LoginGUI extends JFrame {
 						//If the password is correct
 						if(user instanceof Customer) {
 							//CompanyGUICustomer(String string, Company co1, Customer comp)
+							frame.dispose();
 							CompanyGUICustomer return0 = new CompanyGUICustomer("Customer",comp,(Customer)user);
 						}
 						/*else if(user instanceof Employee) {
 							buildBaseGUI();
 							}*/
 						else if(user instanceof Admin) {
+							frame.dispose();
 							buildBaseGUI();
 							buildAdminGUI();
 						}else if(user instanceof OfficeWorker) {
+							frame.dispose();
 							buildBaseGUI();
 							buildOfficeGUI();
 						}else if(user instanceof Tech) {
+							frame.dispose();
 							buildBaseGUI();
 							buildTechGUI();
 						}
 					}else {
 						//if the password is wrong
 						JOptionPane.showMessageDialog(null, 
-								"Password was incorecct", 
+								"Password was incorrect", 
 								"Please try again", 
 								JOptionPane.PLAIN_MESSAGE);
-						LoginGUI return6 = new LoginGUI("Login", comp);
+						//LoginGUI return6 = new LoginGUI("Login", comp);
 					}
 					
 					
@@ -219,13 +223,13 @@ public class LoginGUI extends JFrame {
 		
 		save = new JMenuItem("Save");
 		load = new JMenuItem("Load");
-		
+		signOut = new JMenuItem("Sign Out");
 		save.addActionListener(new MenuListener());
 		load.addActionListener(new MenuListener());
-		
+		signOut.addActionListener(new MenuListener());
 		file.add(save);
 		file.add(load);
-		
+		file.add(signOut);
 		menubar.add(file);
 		frame.add(menubar);
 		
@@ -365,6 +369,9 @@ public class LoginGUI extends JFrame {
 			else if(source.equals(addUser)) {
 				handleAddUser();
 			}
+			else if (source.equals(signOut)) {
+				handleSignOut();
+			}
 			else if(source.equals(editUser)) {
 				handleEditUser();
 			}
@@ -379,36 +386,6 @@ public class LoginGUI extends JFrame {
 				Customer c = addCustomer();
 				c.setName(p.getName());
 				c.setPswd(p.getPswd());
-				
-<<<<<<< HEAD
-				if (option1 == JOptionPane.OK_OPTION) {
-					if (name.getText() != "") {
-					comp.equipmentList.get(posNum).setName(name.getText());
-					}
-					if (dateInstalledMonth.getText() != "") {
-					comp.equipmentList.get(posNum).getDateInstalled().setMonth(Integer.parseInt(dateInstalledMonth.getText()));
-					}
-					if (dateInstalledDay.getText() != "") {
-					comp.equipmentList.get(posNum).getDateInstalled().setDay(Integer.parseInt(dateInstalledDay.getText()));
-					}
-					if (dateInstalledYear.getText() != "") {
-					comp.equipmentList.get(posNum).getDateInstalled().setYear(Integer.parseInt(dateInstalledYear.getText()));
-					}
-					if (locLat.getText() != "") {
-						comp.equipmentList.get(posNum).getLocation().setGpsLat((Double.parseDouble(locLat.getText()));
-					}
-					if (addrLoc.getText() != "") {
-						comp.equipmentList.get(posNum).getLocation().setAddress(addrLoc.getText());
-					}
-					if (locLong.getText() != "") {
-						comp.equipmentList.get(posNum).getLocation().setGpsLon(Double.parseDouble(locLong.getText()));
-					}
-			}
-			else {
-				JOptionPane.showMessageDialog(null, "Not a valid serial number. Equipment not found.", "Edit Equipment Error", JOptionPane.PLAIN_MESSAGE, null);
-=======
->>>>>>> b2cd2473ad9ac4bf6f042e4e190340489cc0a652
-			}
 		}
 	}
 	
@@ -424,6 +401,13 @@ public class LoginGUI extends JFrame {
 			JOptionPane.showMessageDialog(null,"No Company","Error",JOptionPane.PLAIN_MESSAGE);
 		
 	}
+	
+	public void handleSignOut() {
+		 		Company.saveData(comp);
+		 	comp = Company.loadData();
+		 		frame.dispose();
+		 		LoginGUI signedOut = new LoginGUI("WISP", comp);
+		 	}
 	
 	public void handleAddUser() {
 		JPanel addUser = new JPanel();
@@ -452,24 +436,28 @@ public class LoginGUI extends JFrame {
 				Customer c = addCustomer();
 				c.setName(p.getName());
 				c.setPswd(p.getPswd());
+				comp.addPeople(c);
 			}
 			else if(of.isSelected() && p!=null) {
 				OfficeWorker off = new OfficeWorker();
 				off.setName(p.getName());
 				off.setPswd(p.getPswd());
+				comp.addPeople(off);
 			}
 			else if(te.isSelected() && p!=null) {
 				Tech tec = new Tech();
 				tec.setName(p.getName());
 				tec.setPswd(p.getPswd());
-				
+				comp.addPeople(tec);
 			}
 			else if(ad.isSelected() && p!=null) {
 				Admin adi = new Admin();
 				adi.setName(p.getName());
 				adi.setPswd(p.getPswd());
+				comp.addPeople(adi);
 			}
-			
+			Company.saveData(comp);
+			comp = Company.loadData();
 		}
 	}
 
