@@ -36,7 +36,7 @@ public class LoginGUI extends JFrame {
 	//file menu
 	private JMenuItem save;
 	private JMenuItem load;
-	
+	private JMenuItem signOut;
 	//admin menu
 	private JMenuItem addUser;
 	private JMenuItem editUser;
@@ -220,13 +220,13 @@ public class LoginGUI extends JFrame {
 		
 		save = new JMenuItem("Save");
 		load = new JMenuItem("Load");
-		
+		signOut = new JMenuItem("Sign Out");
 		save.addActionListener(new MenuListener());
 		load.addActionListener(new MenuListener());
-		
+		signOut.addActionListener(new MenuListener());
 		file.add(save);
 		file.add(load);
-		
+		file.add(signOut);
 		menubar.add(file);
 		frame.add(menubar);
 		
@@ -358,7 +358,17 @@ public class LoginGUI extends JFrame {
 			else if(source.equals(addUser)) {
 				handleAddUser();
 			}
+			else if (source.equals(signOut)) {
+				handleSignOut();
+			}
 		}
+	}
+	
+	public void handleSignOut() {
+		Company.saveData(comp);
+		comp = Company.loadData();
+		frame.dispose();
+		LoginGUI signedOut = new LoginGUI("WISP", comp);
 	}
 	
 	public void handleLoad() {
