@@ -232,6 +232,11 @@ public class LoginGUI extends JFrame {
 	
 	public void buildAdminGUI() {
 		frame = new JFrame();
+		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setSize(screenSize.width, screenSize.height);
+		setResizable(false);
+		
 		//admin
 		admin = new JMenu("Admin");
 		addUser = new JMenuItem("Add User");
