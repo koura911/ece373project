@@ -387,6 +387,9 @@ public class LoginGUI extends JFrame {
 				c.setName(p.getName());
 				c.setPswd(p.getPswd());
 		}
+			else if (source.equals(editEquip)) {
+				handleEditEquip();
+			}
 	}
 	
 	public void handleLoad() {
@@ -394,6 +397,69 @@ public class LoginGUI extends JFrame {
 		
 	}
 
+	public void handleEditEquip() {		
+		 		String option = JOptionPane.showInputDialog(null, "Enter equipment's serial number: ", "Edit Equipment", JOptionPane.PLAIN_MESSAGE);		
+		 		if (option != "") {
+		 			boolean anE = false;
+		 			int posNum = 0;
+		 			for (int i = 0; i < comp.equipmentList.size(); i++) {
+		 				if (option.equals(comp.equipmentList.get(i).getSerialNumber())) {
+		 					posNum = i;
+		 					anE = true;
+		 					break;
+		 				}
+				}
+		 			if (anE == true) {
+		 				 				JTextField name = new JTextField();
+		 				 				JTextField dateInstalledDay = new JTextField();
+		 				 				JTextField dateInstalledMonth = new JTextField();
+		 				 				JTextField dateInstalledYear = new JTextField();
+		 				 				JTextField addrLoc = new JTextField();
+		 				 				JTextField locLat = new JTextField();
+		 				 				JTextField locLong = new JTextField();
+		 				 				
+		 				 				Object[] fields = {
+		 				 						"Name: ", name,
+		 				 						"Date Installed Day: ", dateInstalledDay,
+		 				 						"Date Inststalled Month: ", dateInstalledMonth,
+		 				 						"Date Installed Year: ", dateInstalledYear,
+		 				 						"Location Address: ", addrLoc,
+		 				 						"Location Lat: ", locLat,
+		 				 						"Location Long: ", locLong
+		 				 				};
+		 				 				
+		 				 				int option1 = JOptionPane.showConfirmDialog(null, fields, "Edit Equipment", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+		 				 				
+		 				 				if (option1 == JOptionPane.OK_OPTION) {
+		 				 					 					if (name.getText() != "") {
+		 				 					  					comp.equipmentList.get(posNum).setName(name.getText());
+		 				 					 					}
+		 				 					 					if (dateInstalledMonth.getText() != "") {
+		 				 					  					comp.equipmentList.get(posNum).getDateInstalled().setMonth(Integer.parseInt(dateInstalledMonth.getText()));
+		 				 					 					}
+		 				 					 					if (dateInstalledDay.getText() != "") {
+		 				 					  					comp.equipmentList.get(posNum).getDateInstalled().setDay(Integer.parseInt(dateInstalledDay.getText()));
+		 				 					 					}
+		 				 					 					if (dateInstalledYear.getText() != "") {
+		 				 					  					comp.equipmentList.get(posNum).getDateInstalled().setYear(Integer.parseInt(dateInstalledYear.getText()));
+		 				 					 				}
+		 				 					 					}
+		 				 					 					if (locLat.getText() != "") {
+		 				 					 						comp.equipmentList.get(posNum).getLocation().setGpsLat((Double.parseDouble(locLat.getText())));
+		 				 					 					}
+		 				 					 					if (addrLoc.getText() != "") {
+		 				 					 						comp.equipmentList.get(posNum).getLocation().setAddress(addrLoc.getText());
+		 				 					 					}
+		 				 					 					if (locLong.getText() != "") {
+		 				 					 						comp.equipmentList.get(posNum).getLocation().setGpsLon(Double.parseDouble(locLong.getText()));
+		 				 					 					}
+		 				 					  			}
+		 				 					  			else {
+		 				 					  				JOptionPane.showMessageDialog(null, "Not a valid serial number. Equipment not found.", "Edit Equipment Error", JOptionPane.PLAIN_MESSAGE, null);
+		 				 					  			}}
+
+		 		}
+		 		
 	public void handleSave() {
 		if(comp != null)
 			Company.saveData(comp);
@@ -542,7 +608,7 @@ public class LoginGUI extends JFrame {
 	
  	public Person addNewUser() {
 		JPanel newUser = new JPanel();
-		addCust.add(new JLabel("Enter the User's Information"));
+
 		
 		JTextField newName = new JTextField(5);
 		JPasswordField newPswd1 = new JPasswordField(5);
@@ -617,4 +683,4 @@ public class LoginGUI extends JFrame {
 	
 	
 	
-}
+	}}
