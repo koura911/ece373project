@@ -362,6 +362,7 @@ public class CompanyGUICustomer extends JFrame {
 			invoicepane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 			invoicepane.setPreferredSize(new Dimension(600, 600));
 			invoice.add(invoicepane);
+			i1.generateInvoice();
 			invoice.pack();
 		}
 		

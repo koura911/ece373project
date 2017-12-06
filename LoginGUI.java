@@ -1,5 +1,7 @@
 package system.software;
 import system.company.*;
+import system.forms.Inventory;
+import system.forms.Roster;
 import system.hardware.Equipment;
 import system.information.Location;
 import system.people.*;
@@ -46,12 +48,13 @@ public class LoginGUI extends JFrame {
 	private JMenuItem addEquip; //same on tech menu
 	private JMenuItem editEquip; //same on tech menu
 	private JMenuItem rmvEquip;
-	
+	private JMenuItem inventoryreport;
+	private JMenuItem rosterreport;
 	//tech menu
 	private JMenuItem addCust; // same on office menu
 	
 	//office menu
-	private JMenuItem reports;
+	private JMenu reports;
 	private JMenuItem forms;
 	
 	
@@ -273,13 +276,17 @@ public class LoginGUI extends JFrame {
 		//office
 		office = new JMenu("Office Worker");
 		addCust = new JMenuItem("Add Customer");
-		reports = new JMenuItem("Reports");
+		reports = new JMenu("Reports");
 		forms = new JMenuItem("Forms");
-		
+		inventoryreport = new JMenuItem("Inventory Report");
+		rosterreport = new JMenuItem("Roster Report");
 		addCust.addActionListener(new MenuListener());
 		reports.addActionListener(new MenuListener());
 		forms.addActionListener(new MenuListener());
-		
+		inventoryreport.addActionListener(new MenuListener());
+		rosterreport.addActionListener(new MenuListener());
+		reports.add(inventoryreport);
+		reports.add(rosterreport);
 		office.add(addCust);
 		office.add(forms);
 		office.add(reports);
@@ -322,7 +329,7 @@ public class LoginGUI extends JFrame {
 		menubar.add(tech);
 		menubar.add(office);
 		
-		frame.add(menubar);
+		frame.setJMenuBar(menubar);
 		frame.setVisible(true);
 
 		
@@ -338,16 +345,24 @@ public class LoginGUI extends JFrame {
 		//office
 		office = new JMenu("Office Worker");
 		addCust = new JMenuItem("Add Customer");
-		reports = new JMenuItem("Reports");
+		reports = new JMenu("Reports");
 		forms = new JMenuItem("Forms");
-		
+		inventoryreport = new JMenuItem("Inventory Report");
+		rosterreport = new JMenuItem("Roster Report");
+		inventoryreport.addActionListener(new MenuListener());
+		rosterreport.addActionListener(new MenuListener());
 		addCust.addActionListener(new MenuListener());
 		reports.addActionListener(new MenuListener());
 		forms.addActionListener(new MenuListener());
-		
+		reports.add(inventoryreport);
+		reports.add(rosterreport);
 		menubar.add(office);
+		office.add(addCust);
+		office.add(forms);
+		office.add(reports);
 		
-		frame.add(menubar);
+		
+		frame.setJMenuBar(menubar);
 		frame.setVisible(true);
 
 		
@@ -386,17 +401,49 @@ public class LoginGUI extends JFrame {
 				Customer c = addCustomer();
 				c.setName(p.getName());
 				c.setPswd(p.getPswd());
+				comp.addPeople(c);
+				Company.saveData(comp);
+				comp = Company.loadData();
 		}
 			else if (source.equals(editEquip)) {
 				handleEditEquip();
 			}
+			else if (source.equals(inventoryreport)) {
+				handleInventoryReport();
+			}
+			else if (source.equals(rosterreport)) {
+				handleRosterReport();
+			}
 	}
 	
+		public void handleInventoryReport() {
+			Inventory in1 = new Inventory();
+			in1.addPerson(user);
+			in1.setEquipment(comp.equipmentList);
+			in1.setTotItems(comp.equipmentList.size());
+			in1.setNumber(user.getUserID());
+			in1.sortEquipment();
+			in1.generateInventoryReport();
+			JOptionPane.showMessageDialog(null, "Inventory report generated. Please look in project folder for PDF.", "Inventory Report", JOptionPane.PLAIN_MESSAGE);
+		}
+		
+		public void handleRosterReport() {
+			Roster ro1 = new Roster();
+			ro1.addPerson(user);
+			ro1.setNumber(user.getUserID());
+			ro1.setPeople(comp.people);
+			ro1.setTotalPeople(comp.people.size());
+			ro1.sortPeople();
+			ro1.generateRoster();
+			JOptionPane.showMessageDialog(null, "Roster report generated. Please look in project folder for PDF.", "Roster Report", JOptionPane.PLAIN_MESSAGE);
+		}
+		
 	public void handleLoad() {
 		comp = Company.loadData();
 		
 	}
 
+	
 	public void handleEditEquip() {		
 		 		String option = JOptionPane.showInputDialog(null, "Enter equipment's serial number: ", "Edit Equipment", JOptionPane.PLAIN_MESSAGE);		
 		 		if (option != "") {
