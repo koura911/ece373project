@@ -209,6 +209,10 @@ public class LoginGUI extends JFrame {
 	public void buildBaseGUI() {
 		frame = new JFrame();
 		menubar = new JMenuBar();
+		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setSize(screenSize.width, screenSize.height);
+		setResizable(false);
 
 		
 		//File Menu
@@ -232,6 +236,11 @@ public class LoginGUI extends JFrame {
 	
 	public void buildAdminGUI() {
 		frame = new JFrame();
+		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setSize(screenSize.width, screenSize.height);
+		setResizable(false);
+		
 		//admin
 		admin = new JMenu("Admin");
 		addUser = new JMenuItem("Add User");
@@ -365,6 +374,60 @@ public class LoginGUI extends JFrame {
 			JOptionPane.showMessageDialog(null,"No Company","Error",JOptionPane.PLAIN_MESSAGE);
 		
 	}
+	
+	public void handleAddUser() {
+		JPanel addUser = new JPanel();
+		addUser.add(new JLabel("Select the Type of User"));
+		JRadioButton ad = new JRadioButton("Admin");
+		JRadioButton te = new JRadioButton("Tech");
+		JRadioButton of = new JRadioButton("Office");
+		JRadioButton cu = new JRadioButton("Customer");
+		ButtonGroup usertypes = new ButtonGroup();
+		usertypes.add(cu);
+		usertypes.add(of);
+		usertypes.add(te);
+		usertypes.add(ad);
+		
+		addUser.add(cu);
+		addUser.add(of);
+		addUser.add(te);
+		addUser.add(ad);
+		
+		int result = JOptionPane.showConfirmDialog(null, addUser, "Add User", JOptionPane.OK_CANCEL_OPTION);
+		
+		if(result == JOptionPane.OK_OPTION) {
+			Person p = addNewUser();
+			
+			if(cu.isSelected() && p!=null) {
+				Customer c = addCustomer();
+				c.setName(p.getName());
+				c.setPswd(p.getPswd());
+			}
+			else if(of.isSelected() && p!=null) {
+				OfficeWorker off = new OfficeWorker();
+				off.setName(p.getName());
+				off.setPswd(p.getPswd());
+			}
+			else if(te.isSelected() && p!=null) {
+				Tech tec = new Tech();
+				tec.setName(p.getName());
+				tec.setPswd(p.getPswd());
+				
+			}
+			else if(ad.isSelected() && p!=null) {
+				Admin adi = new Admin();
+				adi.setName(p.getName());
+				adi.setPswd(p.getPswd());
+			}
+			
+		}
+	}
+
+	public void handleEditUser() {
+		JPanel editUser = new JPanel();
+		editUser.add(new JLabel("Enter the User ID"));
+	}
+	
 	public Person addNewUser() {
 		JPanel newUser = new JPanel();
 		addCust.add(new JLabel("Enter the User's Information"));
@@ -385,10 +448,9 @@ public class LoginGUI extends JFrame {
 		Person p = new Person();
 		
 		if(result == JOptionPane.OK_OPTION) {
-			if(newPswd1.getPassword().toString().equals(newPswd2.getPassword().toString())) {
+			if(newPswd1.getText().equals(newPswd2.getText())) {
 				p.setName(newName.getText());
-				p.setPswd(newPswd1.getPassword().toString());
-				p.setUserID(comp.people.size()+1);
+				p.setPswd(newPswd1.getText());
 				return p;
 			}
 			else {
@@ -425,6 +487,8 @@ public class LoginGUI extends JFrame {
 		addCust.add(new JLabel("Address:"));
 		addCust.add(Address);
 		
+		JOptionPane.showConfirmDialog(null, addCust, "Add Customer", JOptionPane.OK_CANCEL_OPTION);
+		
 		c1.setAddress(Address.getText());
 		c1.setPrice(Double.parseDouble(price.getText()));
 		c1.setDown(Integer.parseInt(sDo.getText()));
@@ -436,51 +500,7 @@ public class LoginGUI extends JFrame {
 			
 	}
 	
-	public void handleAddUser() {
-		JPanel addUser = new JPanel();
-		addUser.add(new JLabel("Select the Type of User"));
-		JRadioButton ad = new JRadioButton("Admin");
-		JRadioButton te = new JRadioButton("Tech");
-		JRadioButton of = new JRadioButton("Office");
-		JRadioButton cu = new JRadioButton("Customer");
-		ButtonGroup usertypes = new ButtonGroup();
-		usertypes.add(cu);
-		usertypes.add(of);
-		usertypes.add(te);
-		usertypes.add(ad);
-		
-		addUser.add(cu);
-		addUser.add(of);
-		addUser.add(te);
-		addUser.add(ad);
-		
-		if(cu.isSelected()) {
-			Person p = addNewUser();
-			Customer c = addCustomer();
-			c.setName(p.getName());
-			c.setPswd(p.getPswd());
-		}
-		else if(of.isSelected()) {
-			Person p = addNewUser();
-			OfficeWorker off = new OfficeWorker();
-			off.setName(p.getName());
-			off.setPswd(p.getPswd());
-		}
-		else if(te.isSelected()) {
-			Person p = addNewUser();
-			Tech tec = new Tech();
-			tec.setName(p.getName());
-			tec.setPswd(p.getPswd());
-			
-		}
-		else if(ad.isSelected()) {
-			Person p = addNewUser();
-			Admin adi = new Admin();
-			adi.setName(p.getName());
-			adi.setPswd(p.getPswd());
-		}
-		
-	}
+	
 	
 	
 	
