@@ -327,13 +327,14 @@ public class CompanyGUICustomer extends JFrame {
 						quote.setTitle("Quote");
 						quote.setLayout(new FlowLayout(FlowLayout.CENTER));
 						quote.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-						JTextArea quoteinfo = new JTextArea("Available Speed Up: " + newQuotes.get(i).getAvailableSpeedUp() + " Mbps\nAvailable Speed Down: " + newQuotes.get(i).getAvailableSpeedDown() + " Mbps\nPrice: $" + newQuotes.get(i).getPrice() + " per month");
+						JTextArea quoteinfo = new JTextArea("Available Speed Up: " + newQuotes.get(i).getAvailableSpeedUp() + " Mbps\n\nAvailable Speed Down: " + newQuotes.get(i).getAvailableSpeedDown() + " Mbps\n\nPrice: $" + newQuotes.get(i).getPrice() + " per month");
 						quoteinfo.setLineWrap(true);
 						JScrollPane quotepane = new JScrollPane(quoteinfo);
 						quotepane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 						quotepane.setPreferredSize(new Dimension(600, 600));
 						quote.add(quotepane);
 						quote.pack();
+						newQuotes.get(i).generateQuote();
 						break;
 					}
 				}
