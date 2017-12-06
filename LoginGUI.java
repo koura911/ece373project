@@ -361,7 +361,19 @@ public class LoginGUI extends JFrame {
 			else if (source.equals(signOut)) {
 				handleSignOut();
 			}
+			else if (source.equals(editEquip)) {
+				handleEditEquip();
+			}
 		}
+	}
+	
+	public void handleEditEquip() {
+		JPanel editEquip = new JPanel();
+		JTextField serialnum = new JTextField("Enter serial number: ");
+		editEquip.add(serialnum);
+		
+		int option = JOptionPane.showConfirmDialog(null, editEquip, "Edit Equipment", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+		
 	}
 	
 	public void handleSignOut() {
@@ -432,6 +444,8 @@ public class LoginGUI extends JFrame {
 				comp.addPeople(adi);
 			}
 			
+			Company.saveData(comp);
+			comp = Company.loadData();
 		}
 	}
 
@@ -442,7 +456,6 @@ public class LoginGUI extends JFrame {
 	
 	public Person addNewUser() {
 		JPanel newUser = new JPanel();
-		addCust.add(new JLabel("Enter the User's Information"));
 		
 		JTextField newName = new JTextField(5);
 		JPasswordField newPswd1 = new JPasswordField(5);
