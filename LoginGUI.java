@@ -402,22 +402,25 @@ public class LoginGUI extends JFrame {
 				Customer c = addCustomer();
 				c.setName(p.getName());
 				c.setPswd(p.getPswd());
+				comp.addPeople(c);
 			}
 			else if(of.isSelected() && p!=null) {
 				OfficeWorker off = new OfficeWorker();
 				off.setName(p.getName());
 				off.setPswd(p.getPswd());
+				comp.addPeople(off);
 			}
 			else if(te.isSelected() && p!=null) {
 				Tech tec = new Tech();
 				tec.setName(p.getName());
 				tec.setPswd(p.getPswd());
-				
+				comp.addPeople(tec);
 			}
 			else if(ad.isSelected() && p!=null) {
 				Admin adi = new Admin();
 				adi.setName(p.getName());
 				adi.setPswd(p.getPswd());
+				comp.addPeople(adi);
 			}
 			
 		}
