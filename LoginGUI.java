@@ -152,7 +152,7 @@ public class LoginGUI extends JFrame {
 						//If the password is correct
 						if(user instanceof Customer) {
 							//CompanyGUICustomer(String string, Company co1, Customer comp)
-							dispose();
+							frame.dispose();
 							CompanyGUICustomer return0 = new CompanyGUICustomer("Customer",comp,(Customer)user);
 						}
 						/*else if(user instanceof Employee) {
@@ -174,10 +174,9 @@ public class LoginGUI extends JFrame {
 					}else {
 						//if the password is wrong
 						JOptionPane.showMessageDialog(null, 
-								"Password was incorecct", 
+								"Password was incorrect", 
 								"Please try again", 
 								JOptionPane.PLAIN_MESSAGE);
-						LoginGUI return6 = new LoginGUI("Login", comp);
 					}
 					
 					
