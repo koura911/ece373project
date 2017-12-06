@@ -402,11 +402,27 @@ public class LoginGUI extends JFrame {
 				int option1 = JOptionPane.showConfirmDialog(null, fields, "Edit Equipment", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 				
 				if (option1 == JOptionPane.OK_OPTION) {
+					if (name.getText() != "") {
 					comp.equipmentList.get(posNum).setName(name.getText());
+					}
+					if (dateInstalledMonth.getText() != "") {
 					comp.equipmentList.get(posNum).getDateInstalled().setMonth(Integer.parseInt(dateInstalledMonth.getText()));
+					}
+					if (dateInstalledDay.getText() != "") {
 					comp.equipmentList.get(posNum).getDateInstalled().setDay(Integer.parseInt(dateInstalledDay.getText()));
+					}
+					if (dateInstalledYear.getText() != "") {
 					comp.equipmentList.get(posNum).getDateInstalled().setYear(Integer.parseInt(dateInstalledYear.getText()));
-				}
+					}
+					if (locLat.getText() != "") {
+						comp.equipmentList.get(posNum).getLocation().setGpsLat((Double.parseDouble(locLat.getText()));
+					}
+					if (addrLoc.getText() != "") {
+						comp.equipmentList.get(posNum).getLocation().setAddress(addrLoc.getText());
+					}
+					if (locLong.getText() != "") {
+						comp.equipmentList.get(posNum).getLocation().setGpsLon(Double.parseDouble(locLong.getText()));
+					}
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "Not a valid serial number. Equipment not found.", "Edit Equipment Error", JOptionPane.PLAIN_MESSAGE, null);
